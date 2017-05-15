@@ -11,11 +11,21 @@ const
   session = require('express-session'),
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
+  listsCtrl = require('./controllers/lists.js'),
   PORT= 3000
+
+mongoose.connect('mongodb://localhost/packing-list', (err) => {
+  console.log(err || "Connected to Mongo!");
+})
+
+app.use(logger('dev'))
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   res.json('Welcome to Travel Tasker')
 })
+
+app.use('/lists', require('./routes/lists.js'))
 
 app.listen(PORT, (err) => {
   console.log(err || `Server listening on port ${PORT}. 🤘`)
