@@ -1,7 +1,13 @@
 <h1>Individual List</h1>
+<a href="/lists">Home</a> | <a href="#">Delete List</a>
 <!-- Display the list -->
 <!-- TITLE -->
+<h3><%= list.title%></h3>
 <!-- LOCATION | TYPE | WEATHER -->
+<%= list.location%> | <%= list.type%> | <%= list.weather%>
+<br>
+<ul id="tasks-list"></ul>
+
 <!-- BY: Username -->
 <!-- Wrapped in current user/list owner if statement -->
 <input type="text" id="task-input">
@@ -11,4 +17,27 @@
 <!-- end if statement -->
 
 
+
 <!--Script tag with ejs to add tasks if the user is logged in???  -->
+<script type="text/javascript">
+  var tasksList = $('#tasks-list')
+  var taskInput = $('#task-input')
+  var addTask = $('#add-task')
+
+  ///append all tasks to the list
+  function appendTask(task){
+    var theLi = $('<li>').attr('id', task._id)
+    theLi.html('<span>' + task.body + '</span>')
+    var editButton = $('<button>').addClass('edit')
+    editButton.text('Edit')
+    var deleteButton = $('<button>').addClass('delete')
+    deleteButton.text('Delete')
+    theLi.append(editButton, deleteButton)
+    tasksList.append(theLi)
+  }
+
+  ///have all tasks show up at once
+
+
+
+</script>
