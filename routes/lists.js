@@ -7,6 +7,10 @@ listRouter.route('/')
   .get(listsCtrl.index)
   .post(listsCtrl.create)
 
+listRouter.get('/new', (req, res) => {
+  res.render('lists/new')
+})
+
 listRouter.route('/:id')
   .get(listsCtrl.show)
   .patch(listsCtrl.update)

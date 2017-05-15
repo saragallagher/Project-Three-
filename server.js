@@ -18,11 +18,13 @@ mongoose.connect('mongodb://localhost/packing-list', (err) => {
   console.log(err || "Connected to Mongo!");
 })
 
+app.set('view engine', 'ejs')
+
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.json('Welcome to Travel Tasker')
+  res.render('index')
 })
 
 app.use('/lists', require('./routes/lists.js'))

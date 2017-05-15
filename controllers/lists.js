@@ -2,9 +2,9 @@ const List = require('../models/List.js')
 
 module.exports = {
   index: (req, res) => {
-    List.find({}, (err, listsFromDB) => {
+    List.find({}, (err, lists) => {
       if(err) return (err)
-      res.json(listsFromDB)
+      res.render('lists/index')
     })
   },
 
@@ -16,8 +16,8 @@ module.exports = {
   },
 
   show: (req, res) => {
-    List.findById(req.params.id, (err, singleList) => {
-      res.json(singleList)
+    List.findById(req.params.id, (err, list) => {
+      res.render('lists/show')
     })
   },
 
