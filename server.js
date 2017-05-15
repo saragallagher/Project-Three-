@@ -11,11 +11,14 @@ const
   session = require('express-session'),
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
+  listsCtrl = require('./controllers/lists.js'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
+  listRoutes = require('./routes/lists.js'), 
   //environment port
   port = process.env.PORT || 3000,
-  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/passport-authentication'
+  mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/project-three'
+
 
 // mongoose connection
   mongoose.connect(mongoConnectionString, (err) => {
@@ -56,13 +59,18 @@ const
   	app.locals.isLoggedIn = !!req.user
   	next()
   })
+
+ 
   //root route
   app.get('/', (req,res) => {
   	res.render('users/index')
   })
 
   app.use('/', userRoutes)
+  app.use('/lists', listRoutes)
+
 
   app.listen(port, (err) => {
   	console.log(err || `Server listening on port ${port}. 🤘`)
   })
+
