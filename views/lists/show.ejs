@@ -37,6 +37,29 @@
   }
 
   ///have all tasks show up at once
+  var requestSettings = {
+    method: 'get',
+    url: '/lists/<%=list.id%>/tasks'
+  }
+  $.ajax(requestSettings).done(function(allTasks){
+    tasksList.html('')
+    allTasks.forEach(function(task){
+      appendTask(task)
+    })
+  })
+  //create a task
+  addTask.on('click', function(){
+    var requestSettings = {
+      method: 'post',
+      url: '/lists/<%=list.id%>/tasks',
+      data: JSON.stringify({body: taskInput.val(), completed: false}),
+      contentType: 'application/json'
+    }
+    $.ajax(requestSettings)
+      .done(function(newTask){
+        appendTask(newTask)
+      })
+  })
 
 
 
