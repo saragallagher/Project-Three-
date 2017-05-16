@@ -14,7 +14,7 @@ const
   listsCtrl = require('./controllers/lists.js'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
-  listRoutes = require('./routes/lists.js'), 
+  listRoutes = require('./routes/lists.js'),
   //environment port
   port = process.env.PORT || 3000,
   mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/project-three'
@@ -22,7 +22,7 @@ const
 
 // mongoose connection
   mongoose.connect(mongoConnectionString, (err) => {
-  	console.log(err || "Connected to MongoDB (passport-authentication)")
+  	console.log(err || "Connected to MongoDB")
   })
 
 // will store session information as a 'sessions' collection in Mongo
@@ -60,10 +60,10 @@ const
   	next()
   })
 
- 
+
   //root route
   app.get('/', (req,res) => {
-  	res.render('users/index')
+  	res.render('index')
   })
 
   app.use('/', userRoutes)
@@ -73,4 +73,3 @@ const
   app.listen(port, (err) => {
   	console.log(err || `Server listening on port ${port}. 🤘`)
   })
-
