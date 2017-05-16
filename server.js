@@ -5,6 +5,7 @@ const
   logger = require('morgan'),
   bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
+  dotenv = require('dotenv').load({silent: true}),
   ejs = require('ejs'),
 	ejsLayouts = require('express-ejs-layouts'),
   flash = require('connect-flash'),

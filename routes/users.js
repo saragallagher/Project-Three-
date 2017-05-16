@@ -30,6 +30,21 @@ userRouter.get('/logout', isLoggedIn, (req,res) =>{
   res.redirect('/')
 })
 
+//Facebook routes
+userRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+
+userRouter.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/profile',
+    failureRedirect: '/login'
+  }));
+
+//Logout function
+userRouter.get('/logout', function(req, res) {
+            req.logout();
+            res.redirect('/');
+});
+
 ///create update and delete lists
 
 userRouter.post('/profile/:id/list', isLoggedIn, (req, res) => {
