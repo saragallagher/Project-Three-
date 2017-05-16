@@ -60,7 +60,43 @@
         appendTask(newTask)
       })
   })
+  // edit a task:
+  var editForm = $('<div>').attr('id', 'edit-form')
+  editForm.append('<input type="text" class="edit-input">')
+  editForm.append('<button>Update</button>')
+  editForm.hide()
 
+  tasksList.on('click', 'li button.edit', function(){
+    $(this).parent().append(editForm)
+    editForm.slideDown()
+    $('.edit-input').val($(this).prev().text())
+  })
 
+  tasksList.on('click', '#edit-form button', function(){
+    var id = $(this).parent().parent().attr('id')
+    var requestSettings = {
+      method: 'patch',
+      url: '/lists/<%=list.id%>/tasks/'+id,
+      data: JSON.stringify({body: $(this).prev().val()}),
+      contentType: 'application/json'
+    }
+    $.ajax(requestSettings)
+      .done(function(data){
+        $('#' + id + ' span').text(data.task.body)
+        editForm.slideUp()
+      })
+  })
+
+  tasksList.on('click', 'li button.delete', function(){
+    var id = $(this).parent().attr('id')
+    var requestSettings = {
+      method: 'delete',
+      url: '/lists/<%=list.id%>/tasks/'+id,
+    }
+    $.ajax(requestSettings)
+      .done(function(data){
+        $('#'+id).remove()
+      })
+  })
 
 </script>
