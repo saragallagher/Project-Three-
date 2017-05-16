@@ -1,5 +1,5 @@
 <h1>Individual List</h1>
-<a href="/lists">Home</a> | <a href="#">Delete List</a>
+<div>
 <!-- Display the list -->
 <!-- TITLE -->
 <h3><%= list.title%></h3>
@@ -11,13 +11,15 @@
 
 <!-- BY: Username -->
 <!-- Wrapped in current user/list owner if statement -->
+
 <input type="text" id="task-input">
 <button id="add-task"> Add </button>
+
 <!-- else  -->
 <!-- clone option -->
 <!-- end if statement -->
-
-<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5" data-width="400"></div>
+</div>
+<!-- <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="1" data-width="400"></div> -->
 
 
 
@@ -60,7 +62,9 @@
     }
     $.ajax(requestSettings)
       .done(function(newTask){
+        console.log(newTask)
         appendTask(newTask)
+        taskInput.val('')
       })
   })
   // edit a task:
@@ -87,6 +91,7 @@
       .done(function(data){
         $('#' + id + ' span').text(data.task.body)
         editForm.slideUp()
+        console.log(data)
       })
   })
 
