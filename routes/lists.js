@@ -2,7 +2,7 @@ const
   express = require('express'),
   listRouter = express.Router(),
   List = require('../models/List.js')
-
+//routes for the list
 listRouter.route('/')
   .get((req, res) => {
     List.find({}, (err, lists) => {
@@ -10,14 +10,6 @@ listRouter.route('/')
       res.render('lists/index', {lists: lists})
     })
   })
-  // .post((req, res) =>{
-  //   List.create(req.body, (err, newList) => {
-  //     if(err) return(err)
-  //     res.redirect('/lists')
-  //   })
-  // })
-
-
 
 listRouter.route('/:id')
   .get((req, res) => {
@@ -25,18 +17,8 @@ listRouter.route('/:id')
       res.render('lists/show', {list: list})
     })
   })
-  .patch((req, res) => {
-    List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedList) => {
-      res.json({success: true, list: updatedList})
-    })
-  })
-  .delete((req, res) => {
-    List.findByIdAndRemove(req.params.id, (err, deleteList) => {
-      res.redirect('/lists')
-    })
-  })
 
-
+//routes for the tasks
 listRouter.route('/:id/tasks')
   .get(function(req, res){
     List.findById(req.params.id, (err, list) => {
@@ -53,8 +35,9 @@ listRouter.route('/:id/tasks')
       newTask.body = req.body.body
       newTask.completed = false
       list.task.push(newTask)
-      list.save()
-      res.json(list)
+      list.save((err, list) => {
+        res.json(list.task[list.task.length -1])
+      })
       // })
     })
   })
@@ -66,8 +49,10 @@ listRouter.route('/:id/tasks/:taskId')
       var newTask = list.task.id(req.params.taskId)
       var index = list.task.indexOf(newTask)
       list.task[index]= req.body
-      list.save()
-      res.json({message: 'updated list', task: newTask})
+      list.save((err, list) => {
+        res.json({message: 'updated list', task: list.task[index]})
+
+      })
     })
   })
   .delete(function(req, res){
