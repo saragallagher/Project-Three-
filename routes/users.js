@@ -51,7 +51,14 @@ userRouter.post('/profile/:id/list', isLoggedIn, (req, res) => {
   var newList = new List(req.body)
   console.log(newList);
   newList.user = req.params.id
-  res.redirect('/lists')
+  newList.save((err, newList) => {
+      if(err){
+        console.log(err)
+      }else{
+        res.redirect('/lists')
+      }
+    })
+  // return
 })
 
 userRouter.get('/profile/:id/list/new', (req, res) => {
