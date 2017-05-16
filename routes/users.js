@@ -2,8 +2,9 @@
 const
   express = require('express'),
   passport = require('passport'),
-  userRouter = express.Router()
-
+  userRouter = express.Router(),
+  List = require('../models/List.js')
+////login sign up logout and profile view
 userRouter.route('/login')
   .get((req,res) =>{res.render('users/login', {message:req.flash('loginMessage')})
 })
@@ -28,6 +29,20 @@ userRouter.get('/logout', isLoggedIn, (req,res) =>{
   req.logout()
   res.redirect('/')
 })
+
+///create update and delete lists
+
+userRouter.post('/profile/:id/list', isLoggedIn, (req, res) => {
+  var newList = new List(req.body)
+  console.log(newList);
+  newList.user = req.params.id
+  res.redirect('/lists')
+})
+
+userRouter.get('/profile/:id/list/new', (req, res) => {
+  res.render('lists/new',  {user:req.user})
+})
+
 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) return next()

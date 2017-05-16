@@ -10,16 +10,14 @@ listRouter.route('/')
       res.render('lists/index', {lists: lists})
     })
   })
-  .post((req, res) =>{
-    List.create(req.body, (err, newList) => {
-      if(err) return(err)
-      res.redirect('/lists')
-    })
-  })
+  // .post((req, res) =>{
+  //   List.create(req.body, (err, newList) => {
+  //     if(err) return(err)
+  //     res.redirect('/lists')
+  //   })
+  // })
 
-listRouter.get('/new', (req, res) => {
-  res.render('lists/new')
-})
+
 
 listRouter.route('/:id')
   .get((req, res) => {
