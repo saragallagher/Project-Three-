@@ -17,7 +17,24 @@ listRouter.route('/:id')
       res.render('lists/show', {list: list})
     })
   })
+  .patch((req, res) => {
+    List.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, list) => {
+      res.redirect('/lists/'+ req.params.id)
+    })
+  })
+  .delete((req, res) => {
+    List.findByIdAndRemove(req.params.id, (err, deleteList) => {
+      res.redirect('/lists')
+    })
 
+  })
+
+listRouter.get('/:id/edit', (req, res) => {
+  List.findById(req.params.id, (err, list) => {
+    res.render('lists/edit',  {list: list})
+
+  })
+  })
 //routes for the tasks
 listRouter.route('/:id/tasks')
   .get(function(req, res){
