@@ -1,4 +1,3 @@
-// comment
 const
   express = require('express'),
   app = express(),
@@ -74,7 +73,6 @@ const
   app.use('/locations', locationRoutes)
 
 
-//add comment
   app.listen(port, (err) => {
   	console.log(err || `Server listening on port ${port}. 🤘`)
   })
