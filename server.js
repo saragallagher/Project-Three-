@@ -1,3 +1,4 @@
+// comment
 const
   express = require('express'),
   app = express(),
@@ -16,10 +17,10 @@ const
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
   listRoutes = require('./routes/lists.js'),
+  locationRoutes = require('./routes/locations.js')
   //environment port
   port = process.env.PORT || 3000,
   mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/project-three'
-
 
 // mongoose connection
   mongoose.connect(mongoConnectionString, (err) => {
@@ -70,8 +71,10 @@ const
 
   app.use('/', userRoutes)
   app.use('/lists', listRoutes)
+  app.use('/locations', locationRoutes)
 
 
+//add comment
   app.listen(port, (err) => {
   	console.log(err || `Server listening on port ${port}. 🤘`)
   })

@@ -57,7 +57,7 @@ passport.use('local-login', new LocalStrategy({
 passport.use(new FacebookStrategy({
   clientID: process.env.Facebook_clientID,
   clientSecret: process.env.Facebook_clientSecret,
-  callbackURL: "http://localhost:3000/auth/facebook/callback"
+  callbackURL: "https://intense-bastion-63152.herokuapp.com/login/auth/facebook/callback"
 },
 function(token, refreshToken, profile, done) {
  process.nextTick(function(){
