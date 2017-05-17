@@ -40,7 +40,7 @@ userRouter.get('/auth/facebook/callback',
   //   // Successful authentication, redirect home.
   //   res.redirect('/') })
   passport.authenticate('facebook', {
-    successRedirect: '/profile',
+    successRedirect: '/',
     failureRedirect: '/login'
   }));
 
