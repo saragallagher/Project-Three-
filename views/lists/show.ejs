@@ -1,8 +1,9 @@
 <h1>Individual List</h1>
-
+<div >
 <h3><%= list.title%></h3>
 <%= list.location%> | <%= list.type%> | <%= list.weather%>
 <%if(currentUser.id ==list.user) { %>
+</div>
 
     <div>
       <!-- edit the list name, location, weather, type -->
@@ -23,7 +24,7 @@
     <button id="clone-list">Copy List</button>
 <% } %>
 
-<ul id="tasks-list">
+<ul class="list-group col-sm-6" id="tasks-list">
 
   <li></li>
 
@@ -44,6 +45,7 @@
   ///append all tasks to the list
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
+    theLi.addClass('list-group-item')
     theLi.html('<span>' + task.body + '</span>')
     var editButton = $('<button>').addClass('edit')
     editButton.text('Edit')
@@ -127,6 +129,7 @@
 
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
+    theLi.addClass('list-group-item')
     theLi.html('<span>' + task.body + '</span>')
     tasksList.append(theLi)
   }
