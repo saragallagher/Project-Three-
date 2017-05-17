@@ -1,0 +1,9 @@
+<h1>All Locations: </h1>
+
+<!-- Display all location's names **title** -->
+<ul>
+  <!-- <button><a href="/lists/new">Add a List</a></button> -->
+<% locations.forEach((location) => { %>
+    <li><a href="/locations/<%= location.id%>"><%= location.title %></a></li>
+<% }) %>
+</ul>
