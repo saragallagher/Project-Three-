@@ -31,6 +31,11 @@ userRouter.get('/logout', isLoggedIn, (req,res) =>{
   res.redirect('/')
 })
 
+userRouter.delete('/profile/:id', function(req,res){
+          res.json({message: 'task was deleted!', succes: true})
+    })
+
+
 //Facebook routes
 userRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 
