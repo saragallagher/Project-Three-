@@ -17,7 +17,8 @@ const
   userRoutes = require('./routes/users.js'),
   adminRoutes = require('./routes/admin.js'),
   listRoutes = require('./routes/lists.js'),
-  locationRoutes = require('./routes/locations.js')
+  locationRoutes = require('./routes/locations.js'),
+  apiRoutes = require('./routes/locations-api.js'),
   //environment port
   port = process.env.PORT || 3000,
   mongoConnectionString = process.env.MONGODB_URL || 'mongodb://localhost/project-three'
@@ -72,7 +73,7 @@ const
   app.use('/', userRoutes)
   app.use('/lists', listRoutes)
   app.use('/locations', locationRoutes)
-
+  app.use('/api', apiRoutes)
 
   app.listen(port, (err) => {
   	console.log(err || `Server listening on port ${port}. 🤘`)

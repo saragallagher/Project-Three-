@@ -35,10 +35,11 @@ userRouter.get('/logout', isLoggedIn, (req,res) =>{
 userRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 
 userRouter.get('/auth/facebook/callback',
-  passport.authenticate('facebook', {
-    successRedirect: '/profile',
-    failureRedirect: '/login'
-  }));
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  })
 
 //Logout function
 userRouter.get('/logout', function(req, res) {
@@ -50,7 +51,7 @@ userRouter.get('/logout', function(req, res) {
 
 userRouter.route('/profile/:id/lists', isLoggedIn)
   .post(listsController.create)
-userRouter.route('/profile/:id/lists/new')
+userRouter.route('/profile/:id/lists/new', isLoggedIn)
   .get(listsController.new)
 
 function isLoggedIn(req, res, next) {
