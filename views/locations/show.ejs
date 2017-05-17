@@ -1,0 +1,14 @@
+<h1>The new Location: <%= location.title%></h1>
+<ul>
+  <li>svgPath: <%= location.svgPath%></li>
+  <li>zoomLevel: <%= location.zoomLevel%></li>
+  <li>scale: <%= location.scale%></li>
+  <li>title: <%= location.title%></li>
+  <li>latitude: <%= location.latitude%></li>
+  <li>longitude: <%= location.longitude%></li>
+  <li>url: <%= location.url%></li>
+</ul>
+
+<form method="post" action="/locations/<%=location.id %>?_method=DELETE" >
+<button type="submit" name="button">Delete</button>
+</form>
