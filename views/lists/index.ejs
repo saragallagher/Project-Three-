@@ -1,2 +1,10 @@
 <h1>All Lists: </h1>
+
+
 <!-- Display All the lists with title/location/weather/type/username && clickable links -->
+<ul>
+  <!-- <button><a href="/lists/new">Add a List</a></button> -->
+<% lists.forEach((list) => { %>
+    <li><a href="/lists/<%= list.id%>"><%= list.title %></a></li>
+<% }) %>
+</ul>
