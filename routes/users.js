@@ -50,7 +50,7 @@ userRouter.get('/logout', function(req, res) {
 
 userRouter.route('/profile/:id/lists', isLoggedIn)
   .post(listsController.create)
-userRouter.route('/profile/:id/lists/new')
+userRouter.route('/profile/:id/lists/new', isLoggedIn)
   .get(listsController.new)
 
 function isLoggedIn(req, res, next) {

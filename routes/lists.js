@@ -18,7 +18,11 @@ listRouter.route('/:id/copy/:user_id')
         doc.isNew = true;
         doc.user = req.params.user_id
         doc.save(function(err, doc){
-          res.json(doc)
+          if(err){
+            console.log(err)
+          }else{
+            res.json(doc)
+          }
         })
       }
     )

@@ -3,6 +3,7 @@
 <h3><%= list.title%></h3>
 <%= list.location%> | <%= list.type%> | <%= list.weather%>
 <%if(currentUser.id ==list.user) { %>
+
     <div>
       <!-- edit the list name, location, weather, type -->
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
@@ -18,6 +19,7 @@
 
 
 <% }else{ %>
+
     <button id="clone-list">Copy List</button>
 <% } %>
 
