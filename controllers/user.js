@@ -18,7 +18,7 @@ module.exports = {
   },
   destroy: (req, res) => {
     List.findByIdAndRemove(req.params.id, (err, deleteList) => {
-      res.redirect('/lists')
+      res.redirect('/')
     })
   }
 }

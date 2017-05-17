@@ -57,7 +57,10 @@ passport.use('local-login', new LocalStrategy({
 passport.use(new FacebookStrategy({
   clientID: process.env.Facebook_clientID,
   clientSecret: process.env.Facebook_clientSecret,
-  callbackURL: "https://intense-bastion-63152.herokuapp.com/login/auth/facebook/callback"
+
+  callbackURL: "https://travelpackr.herokuapp.com/auth/facebook/callback"
+
+
 },
 function(token, refreshToken, profile, done) {
  process.nextTick(function(){

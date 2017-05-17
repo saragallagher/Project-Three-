@@ -35,8 +35,12 @@ userRouter.get('/logout', isLoggedIn, (req,res) =>{
 userRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 
 userRouter.get('/auth/facebook/callback',
+  // passport.authenticate('facebook', { failureRedirect: '/login' }),
+  // function(req, res) {
+  //   // Successful authentication, redirect home.
+  //   res.redirect('/') })
   passport.authenticate('facebook', {
-    successRedirect: '/profile',
+    successRedirect: '/',
     failureRedirect: '/login'
   }));
 
@@ -57,6 +61,22 @@ function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) return next()
   res.redirect('/')
 }
+
+// //Admin routes
+// var requiresAdmin = function() {
+//   return [
+//     isLoggedIn(),
+//     function(req, res, next) {
+//       if (req.user && req.user.isAdmin === true)
+//         next();
+//       else
+//         res.send(401, 'Unauthorized');
+//     }
+//   ]
+// };
+//
+// adminRouter.all('/admin/*', requiresAdmin());
+// adminRouter.get('/admin/');
 
 
 module.exports = userRouter
