@@ -1,37 +1,42 @@
 <h1>Individual List</h1>
-<div>
-<!-- Display the list -->
-<!-- TITLE -->
-<h3><%= list.title%></h3>
-<!-- LOCATION | TYPE | WEATHER -->
-<%= list.location%> | <%= list.type%> | <%= list.weather%>
-<br>
-<h4><%= list.user%></h4>
-<button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
-<form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
-<button type="submit" name="button">Delete</button>
-</form>
-<ul id="tasks-list"></ul>
 
-<!-- BY: Username -->
-<!-- Wrapped in current user/list owner if statement -->
+<%if(currentUser.id ==list.user) { %>
+    <div>
+      <!-- edit the list name, location, weather, type -->
+      <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
+      <!-- delete the entire lists with tasks and all -->
+      <form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
+        <button type="submit" name="button">Delete</button>
+      </form>
+    </div>
 
-<input type="text" id="task-input">
-<button id="add-task"> Add </button>
+  <h3><%= list.title%></h3>
+  <%= list.location%> | <%= list.type%> | <%= list.weather%>
+    <input type="text" id="task-input">
+    <button id="add-task"> Add </button>
 
-<!-- else  -->
-<!-- clone option -->
-<!-- end if statement -->
-</div>
+
+<% }else{ %>
+    <button id="clone-list">Copy List</button>
+<% } %>
+
+<ul id="tasks-list">
+
+  <li></li>
+
+
+</ul>
+
+
 <!-- <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="1" data-width="400"></div> -->
 
-
-
 <!--Script tag with ejs to add tasks if the user is logged in???  -->
+<%if(currentUser.id ==list.user) { %>
 <script type="text/javascript">
   var tasksList = $('#tasks-list')
   var taskInput = $('#task-input')
   var addTask = $('#add-task')
+
 
   ///append all tasks to the list
   function appendTask(task){
@@ -110,5 +115,26 @@
         $('#'+id).remove()
       })
   })
-
 </script>
+<% } else {%>
+  <script type="text/javascript">
+  var tasksList = $('#tasks-list')
+
+  function appendTask(task){
+    var theLi = $('<li>').attr('id', task._id)
+    theLi.html('<span>' + task.body + '</span>')
+    tasksList.append(theLi)
+  }
+
+  var requestSettings = {
+    method: 'get',
+    url: '/lists/<%=list.id%>/tasks'
+  }
+  $.ajax(requestSettings).done(function(allTasks){
+    tasksList.html('')
+    allTasks.forEach(function(task){
+      appendTask(task)
+    })
+  })
+  </script>
+<% } %>
