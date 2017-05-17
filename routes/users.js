@@ -64,20 +64,21 @@ userRouter.get('/profile/:id/lists/new', (req, res) => {
   res.render('lists/new',  {user:req.user})
 })
 
-userRouter.patch('/profile/:id/lists/:listId', isLoggedIn, (req, res) => {
-  var updatedList = List.findByIdAndUpdate(req.params.listId, req.body, {new: true})
-  updatedList.user = req.params.id
-  updatedList.save((err, updatedList)=> {
-    res.redirect('/lists')
-  })
-})
 
-userRouter.delete('/profile/:id/lists/:listId', isLoggedIn, (req, res) => {
-  List.findByIdAndRemove(req.params.id, (err, deleteList) => {
-    res.redirect('/lists')
-  })
+// userRouter.patch('/profile/:id/lists/:listId', isLoggedIn, (req, res) => {
+//   var updatedList = List.findByIdAndUpdate(req.params.listId, req.body, {new: true})
+//   updatedList.user = req.params.id
+//   updatedList.save((err, updatedList)=> {
+//     res.redirect('/lists')
+//   })
+// })
 
-})
+// userRouter.delete('/profile/:id/lists/:listId', isLoggedIn, (req, res) => {
+//   List.findByIdAndRemove(req.params.id, (err, deleteList) => {
+//     res.redirect('/lists')
+//   })
+//
+// })
 
 
 

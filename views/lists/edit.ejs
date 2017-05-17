@@ -1,0 +1,13 @@
+<h1>Edit List</h1>
+
+<form method="post" action="/lists/<%=list.id %>?_method=PATCH" >
+  <label>Title</label>
+  <input type="text" name="title" value="<%= list.title%>">
+  <label>Location</label>
+  <input type="text" name="location" value="<%= list.location%>">
+  <label>Weather</label>
+  <input type="text" name="weather" value="<%= list.weather%>">
+  <label>Event Type</label>
+  <input type="text" name="type" value="<%= list.type%>">
+  <button type="submit">Update List!</button>
+</form>

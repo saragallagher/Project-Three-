@@ -12,6 +12,7 @@ const
   session = require('express-session'),
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
+  methodOverride = require('method-override'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
   listRoutes = require('./routes/lists.js'),
@@ -40,6 +41,7 @@ const
 
   // ejs configuration
   app.set('view engine', 'ejs')
+  app.use(methodOverride('_method'))
   app.use(ejsLayouts)
   app.use(express.static(__dirname + '/public'))
 
