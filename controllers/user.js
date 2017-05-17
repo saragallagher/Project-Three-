@@ -17,7 +17,7 @@ module.exports = {
     })
   },
   destroy: (req, res) => {
-    User.findByIdAndRemove(req.params.id, (err, deleteList) => {
+    List.findByIdAndRemove(req.params.id, (err, deleteList) => {
       res.redirect('/')
     })
   }
