@@ -6,8 +6,12 @@ const
     scale: { type: Number, default: '0.5' },
     title: String,
     latitude: Number,
-    longitude: Number,
-    url: String,
+    longitude: Number
+    // url: String,
+  }, { toJSON: {virtuals: true} })
+
+  locationSchema.virtual('url').get(function() {
+    return '/locations/' + this.id
   })
 
 module.exports = mongoose.model('Location', locationSchema)
