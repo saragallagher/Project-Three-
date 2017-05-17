@@ -6,12 +6,14 @@ const
   logger = require('morgan'),
   bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
+  dotenv = require('dotenv').load({silent: true}),
   ejs = require('ejs'),
 	ejsLayouts = require('express-ejs-layouts'),
   flash = require('connect-flash'),
   session = require('express-session'),
   MongoDBStore = require('connect-mongodb-session')(session),
   passport = require('passport'),
+  methodOverride = require('method-override'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
   listRoutes = require('./routes/lists.js'),
@@ -22,7 +24,7 @@ const
 
 // mongoose connection
   mongoose.connect(mongoConnectionString, (err) => {
-  	console.log(err || "Connected to MongoDB (passport-authentication)")
+  	console.log(err || "Connected to MongoDB")
   })
 
 // will store session information as a 'sessions' collection in Mongo
@@ -40,6 +42,7 @@ const
 
   // ejs configuration
   app.set('view engine', 'ejs')
+  app.use(methodOverride('_method'))
   app.use(ejsLayouts)
   app.use(express.static(__dirname + '/public'))
 
@@ -63,7 +66,7 @@ const
 
   //root route
   app.get('/', (req,res) => {
-  	res.render('users/index')
+  	res.render('index')
   })
 
   app.use('/', userRoutes)

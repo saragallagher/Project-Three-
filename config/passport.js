@@ -1,7 +1,10 @@
 const
+  dotenv = require('dotenv').load({silent: true}),
   passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy
-  User = require('../models/User.js')
+  LocalStrategy = require('passport-local').Strategy,
+  User = require('../models/User.js'),
+  FacebookStrategy = require('passport-facebook').Strategy;
+
 
 //Generate a cookie string (encoded string out of user's ID)
 passport.serializeUser((user, done) => {
@@ -49,5 +52,37 @@ passport.use('local-login', new LocalStrategy({
     return done(null, user)
   })
 }))
+
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.Facebook_clientID,
+  clientSecret: process.env.Facebook_clientSecret,
+  callbackURL: "http://localhost:3000/auth/facebook/callback"
+},
+function(token, refreshToken, profile, done) {
+ process.nextTick(function(){
+   User.findOne({ 'facebook.id': profile._id }, function(err, user) {
+     if(err) {return done(err)};
+
+     if(user) {
+       return done(null, user);
+     } else {
+       var newUser = new User();
+
+       newUser.facebook.id    = profile.id;
+       newUser.facebook.token = token;
+       newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+       newUser.facebook.email = profile.emails[0].value;
+
+       newUser.save(function(err) {
+         if(err)
+           throw err;
+
+           return done(null, newUser);
+       });
+     }
+   });
+ });
+}));
 
 module.exports = passport

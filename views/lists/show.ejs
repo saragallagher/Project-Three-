@@ -1,20 +1,29 @@
 <h1>Individual List</h1>
-<a href="/lists">Home</a> | <a href="#">Delete List</a>
+<div>
 <!-- Display the list -->
 <!-- TITLE -->
 <h3><%= list.title%></h3>
 <!-- LOCATION | TYPE | WEATHER -->
 <%= list.location%> | <%= list.type%> | <%= list.weather%>
 <br>
+<h4><%= list.user%></h4>
+<button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
+<form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
+<button type="submit" name="button">Delete</button>
+</form>
 <ul id="tasks-list"></ul>
 
 <!-- BY: Username -->
 <!-- Wrapped in current user/list owner if statement -->
+
 <input type="text" id="task-input">
 <button id="add-task"> Add </button>
+
 <!-- else  -->
 <!-- clone option -->
 <!-- end if statement -->
+</div>
+<!-- <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="1" data-width="400"></div> -->
 
 
 
@@ -57,7 +66,9 @@
     }
     $.ajax(requestSettings)
       .done(function(newTask){
+        console.log(newTask)
         appendTask(newTask)
+        taskInput.val('')
       })
   })
   // edit a task:
@@ -84,6 +95,7 @@
       .done(function(data){
         $('#' + id + ' span').text(data.task.body)
         editForm.slideUp()
+        console.log(data)
       })
   })
 
