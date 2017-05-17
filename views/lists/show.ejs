@@ -1,5 +1,11 @@
 <h1>Individual List</h1>
 <div>
+<button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
+<form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
+<button type="submit" name="button">Delete</button>
+</form>
+</div>
+<div>
 <!-- Display the list -->
 <!-- TITLE -->
 <h3><%= list.title%></h3>
@@ -7,10 +13,7 @@
 <%= list.location%> | <%= list.type%> | <%= list.weather%>
 <br>
 <h4><%= list.user%></h4>
-<button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
-<form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
-<button type="submit" name="button">Delete</button>
-</form>
+
 <ul id="tasks-list"></ul>
 
 <!-- BY: Username -->
