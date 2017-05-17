@@ -1,6 +1,9 @@
 <h1>Individual List</h1>
 
+<h3><%= list.title%></h3>
+<%= list.location%> | <%= list.type%> | <%= list.weather%>
 <%if(currentUser.id ==list.user) { %>
+
     <div>
       <!-- edit the list name, location, weather, type -->
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
@@ -10,13 +13,13 @@
       </form>
     </div>
 
-  <h3><%= list.title%></h3>
-  <%= list.location%> | <%= list.type%> | <%= list.weather%>
+
     <input type="text" id="task-input">
     <button id="add-task"> Add </button>
 
 
 <% }else{ %>
+
     <button id="clone-list">Copy List</button>
 <% } %>
 
@@ -108,7 +111,7 @@
     var id = $(this).parent().attr('id')
     var requestSettings = {
       method: 'delete',
-      url: '/lists/<%=list.id%>/tasks/'+id,
+      url: '/lists/<%=list.id%>/tasks/'+id
     }
     $.ajax(requestSettings)
       .done(function(data){
@@ -117,8 +120,12 @@
   })
 </script>
 <% } else {%>
-  <script>
+
+  <script >
+
   var tasksList = $('#tasks-list')
+  var cloneList = $('#clone-list')
+
 
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
@@ -131,10 +138,24 @@
     url: '/lists/<%=list.id%>/tasks'
   }
   $.ajax(requestSettings).done(function(allTasks){
+    console.log(allTasks, )
     tasksList.html('')
     allTasks.forEach(function(task){
       appendTask(task)
     })
   })
+
+
+  cloneList.on('click', function(){
+    console.log('before:', '<%= list._id%>', '<%=list.user%>')
+    var requestSettings = {
+      method: 'GET',
+      url: '/lists/<%=list.id%>/copy/<%=currentUser.id%>'
+    }
+    $.ajax(requestSettings).done(function(theList){
+      console.log(theList)
+    })
+  })
+
   </script>
 <% } %>
