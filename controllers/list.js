@@ -13,6 +13,21 @@ module.exports = {
       res.render('lists/show', {list: list})
     })
   },
+  new: (req, res) => {
+    res.render('lists/new',  {user:req.user})
+  },
+  create: (req, res) => {
+    var newList = new List(req.body)
+    console.log(newList);
+    newList.user = req.params.id
+    newList.save((err, newList) => {
+        if(err){
+          console.log(err)
+        }else{
+          res.redirect('/lists')
+        }
+      })
+  },
   edit: (req, res) => {
     List.findById(req.params.id, (err, list) => {
       res.render('lists/edit',  {list: list})
