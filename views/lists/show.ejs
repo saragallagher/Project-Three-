@@ -32,7 +32,7 @@
 
 <!--Script tag with ejs to add tasks if the user is logged in???  -->
 <%if(currentUser.id ==list.user) { %>
-<script type="text/javascript">
+<script>
   var tasksList = $('#tasks-list')
   var taskInput = $('#task-input')
   var addTask = $('#add-task')
@@ -117,7 +117,7 @@
   })
 </script>
 <% } else {%>
-  <script type="text/javascript">
+  <script>
   var tasksList = $('#tasks-list')
 
   function appendTask(task){
