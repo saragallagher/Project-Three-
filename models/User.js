@@ -2,13 +2,15 @@
 const
   mongoose = require('mongoose'),
   bcrypt = require('bcrypt-nodejs'),
+  admins = require('../public/admins.js')
   userSchema = new mongoose.Schema({
     local: {
       firstname: String,
       lastname: String,
       email: String,
-      password: String
-    }
+      password: String,
+      isAdmin: {type: Boolean, default: false}
+    }//,
   })
 
   userSchema.methods.generateHash = function(password){
