@@ -3,13 +3,11 @@ const
   apiRouter = express.Router(),
   apiController = require('../controllers/locations-api.js')
 
-apiRouter.route('/')
+apiRouter.route('/locations')
   .get(apiController.index)
   .post(apiController.create)
 
-apiRouter.get('/new', apiController.new)
-
-apiRouter.route('/:id')
+apiRouter.route('/locations/:id')
   .get(apiController.show)
   .delete(apiController.destroy)
 
