@@ -1,5 +1,5 @@
 <h1>Individual List</h1>
-<%=list.task%>
+
 <h3><%= list.title%></h3>
 <%= list.location%> | <%= list.type%> | <%= list.weather%>
 <%if(currentUser.id ==list.user) { %>
@@ -143,9 +143,10 @@
 
 
   cloneList.on('click', function(){
+    console.log('before:', '<%= list._id%>', '<%=list.user%>')
     var requestSettings = {
-      method: 'get',
-      url: '<%=list.id%>'
+      method: 'GET',
+      url: '/lists/<%=list.id%>/copy/<%=currentUser.id%>'
     }
     $.ajax(requestSettings).done(function(theList){
       console.log(theList)

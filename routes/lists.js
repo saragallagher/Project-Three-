@@ -1,5 +1,6 @@
 const
   express = require('express'),
+  mongoose = require('mongoose'),
   listRouter = express.Router(),
   List = require('../models/List.js'),
   tasksController = require('../controllers/task.js')
@@ -7,6 +8,21 @@ const
 //routes for the list
 listRouter.route('/')
   .get(listsController.index)
+
+listRouter.route('/:id/copy/:user_id')
+  .get((req, res) => {
+    console.log(req.params);
+    List.findById(req.params.id).exec(
+      function(err, doc){
+        doc._id = mongoose.Types.ObjectId();
+        doc.isNew = true;
+        doc.user = req.params.user_id
+        doc.save(function(err, doc){
+          res.json(doc)
+        })
+      }
+    )
+  })
 
 listRouter.route('/:id')
   .get(listsController.show)
