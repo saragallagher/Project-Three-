@@ -23,7 +23,7 @@ const
 
 // mongoose connection
   mongoose.connect(mongoConnectionString, (err) => {
-  	console.log(err || "Connected to MongoDB (passport-authentication)")
+  	console.log(err || "Connected to MongoDB")
   })
 
 // will store session information as a 'sessions' collection in Mongo
@@ -65,7 +65,7 @@ const
 
   //root route
   app.get('/', (req,res) => {
-  	res.render('users/index')
+  	res.render('index')
   })
 
   app.use('/', userRoutes)
