@@ -84,19 +84,6 @@
         taskInput.val('')
       })
   })
-  // edit a task:
-  // var editForm = $('<div>').attr('id', 'edit-form')
-  // editForm.append('<input type="text" class="edit-input">')
-  // editForm.append('<button>Update</button>')
-  // editForm.hide()
-  //
-  // tasksList.on('click', 'li button.edit', function(){
-  //   $(this).parent().append(editForm)
-  //   editForm.slideDown()
-  //   $('.edit-input').val($(this).prev().text())
-  // })
-
-
 
   tasksList.on('click', 'li button.edit', function(){
           var id = $(this).parent().attr('id')
@@ -187,10 +174,12 @@
     console.log('before:', '<%= list._id%>', '<%=list.user%>')
     var requestSettings = {
       method: 'GET',
-      url: '/lists/<%=list.id%>/copy/<%=currentUser.id%>'
+      url: '/lists/<%=list.id%>/copy/<%=currentUser.id%>',
+
     }
     $.ajax(requestSettings).done(function(theList){
-      console.log(theList)
+      // console.log(theList);
+      window.location='/lists'
     })
   })
 
