@@ -6,7 +6,18 @@
 <ul>
   <!-- <button><a href="/lists/new">Add a List</a></button> -->
 <% lists.forEach((list) => { %>
-    <li><a href="/lists/<%= list.id%>"><%= list.title %></a></li>
+    <li><a href="/lists/<%= list.id%>"><%= list.title %></a>
+      <div>
+        <% if( currentUser.local.isAdmin) { %>
+        <!-- edit the list name, location, weather, type -->
+        <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
+        <!-- delete the entire lists with tasks and all -->
+        <form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
+          <button type="submit" name="button">Delete</button>
+        </form>
+        <% } %>
+      </div>
+    </li>
 <% }) %>
 </ul>
 

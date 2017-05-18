@@ -10,10 +10,11 @@ module.exports = {
     })
   },
   show: (req, res) => {
+
     List.findById(req.params.id)
-    .populate('location')
-    .exec((err,list) =>{
-    res.render('lists/show', {list})
+      .populate('location user')
+      .exec( (err, list) => {
+      res.render('lists/show', {list: list})
     })
   },
   new: (req, res) => {
