@@ -26,9 +26,9 @@ module.exports = {
       var newTask = list.task.id(req.params.taskId)
       var index = list.task.indexOf(newTask)
       list.task[index]= req.body
+      console.log(list.task[index]);
       list.save((err, list) => {
         res.json({message: 'updated list', task: list.task[index]})
-
       })
     })
   },
