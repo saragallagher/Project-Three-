@@ -1,4 +1,3 @@
-<h1>Individual List</h1>
 <div >
 <h3><%= list.title%></h3>
 <%= list.location%> | <%= list.type%> | <%= list.weather%>
@@ -42,14 +41,18 @@
   var addTask = $('#add-task')
 
 
+
+
   ///append all tasks to the list
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
     theLi.addClass('list-group-item')
-    theLi.html('<span>' + task.body + '</span>')
+    theLi.html('<span style="padding-right: 2em;">' + task.body + '</span>')
     var editButton = $('<button>').addClass('edit')
+    editButton.css('float', 'right')
     editButton.text('Edit')
     var deleteButton = $('<button>').addClass('delete')
+    deleteButton.css('float', 'right')
     deleteButton.text('Delete')
     theLi.append(editButton, deleteButton)
     tasksList.append(theLi)
@@ -82,19 +85,40 @@
       })
   })
   // edit a task:
-  var editForm = $('<div>').attr('id', 'edit-form')
-  editForm.append('<input type="text" class="edit-input">')
-  editForm.append('<button>Update</button>')
-  editForm.hide()
+  // var editForm = $('<div>').attr('id', 'edit-form')
+  // editForm.append('<input type="text" class="edit-input">')
+  // editForm.append('<button>Update</button>')
+  // editForm.hide()
+  //
+  // tasksList.on('click', 'li button.edit', function(){
+  //   $(this).parent().append(editForm)
+  //   editForm.slideDown()
+  //   $('.edit-input').val($(this).prev().text())
+  // })
+
+
 
   tasksList.on('click', 'li button.edit', function(){
-    $(this).parent().append(editForm)
-    editForm.slideDown()
-    $('.edit-input').val($(this).prev().text())
-  })
+          var id = $(this).parent().attr('id')
+          var text = $(this).prev().html()
+          var editField = $('<input type="text">')
+          var updateButton = $('<button>')
+          console.log(text)
+          editField.attr('value', text)
+          editField.addClass('updater '+id)
+          console.log(editField);
+          updateButton.text('Update')
+          updateButton.attr('id', id)
+          updateButton.addClass('update')
 
-  tasksList.on('click', '#edit-form button', function(){
-    var id = $(this).parent().parent().attr('id')
+          $('#' + id).empty()
+          $('#' + id).append(editField)
+          $('#' + id).append(updateButton)
+        })
+
+  tasksList.on('click', 'li button.update', function(){
+    var id = $(this).parent().attr('id')
+    console.log(id);
     var requestSettings = {
       method: 'patch',
       url: '/lists/<%=list.id%>/tasks/'+id,
@@ -104,7 +128,17 @@
     $.ajax(requestSettings)
       .done(function(data){
         $('#' + id + ' span').text(data.task.body)
-        editForm.slideUp()
+        var theLi = ($('#' + id));
+        theLi.text(data.task.body)
+        var editButton = $('<button>').addClass('edit')
+        editButton.css('float', 'right')
+        editButton.text('Edit')
+        var deleteButton = $('<button>').addClass('delete')
+        deleteButton.css('float', 'right')
+        deleteButton.text('Delete')
+        theLi.append(editButton, deleteButton)
+        var input = $('input').attr('updater ' + id)
+        console.log(input)
         console.log(data)
       })
   })
@@ -132,7 +166,7 @@
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
     theLi.addClass('list-group-item')
-    theLi.html('<span>' + task.body + '</span>')
+    theLi.html('<span style="padding-right: 2em;">' + task.body + '</span>')
     tasksList.append(theLi)
   }
 
