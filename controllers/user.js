@@ -5,6 +5,12 @@ module.exports = {
   index: (req, res) => {
 
   },
+  users: (req,res) => {
+    User.find({}, (err, users) => {
+      if(err) return (err)
+      res.json(users)
+    })
+  },
   show: (req, res) => {
 
   },

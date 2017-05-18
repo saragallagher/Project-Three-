@@ -1,0 +1,7 @@
+<%= users %>
+
+<ul>
+    <% users.forEach((user) => { %>
+      <li><%= user.local.firstname %>| <%= user.local.lastname %> | <%= user.local.email%> | <%= user.local.id %> </li>
+    <% } %>
+</ul>

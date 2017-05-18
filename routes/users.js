@@ -62,6 +62,9 @@ userRouter.route('/profile/:id/lists', isLoggedIn)
 userRouter.route('/profile/:id/lists/new', isLoggedIn)
   .get(listsController.new)
 
+  userRouter.route('/users')
+    .get(usersController.users)
+
   userRouter.route('/official/:id', isLoggedIn)
     .get((req,res) =>{res.render('users/admin', {user: req.user})
   })
