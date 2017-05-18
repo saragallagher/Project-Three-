@@ -21,9 +21,12 @@ listRouter.route('/:id/copy/:user_id')
           if(err){
             console.log(err)
           }else{
-            res.json(doc)
+            // res.json(doc)
+            console.log('it saved! cool')
           }
         })
+        res.redirect('/lists')
+
       }
     )
   })
