@@ -4,7 +4,9 @@ const
   passport = require('passport'),
   userRouter = express.Router(),
   List = require('../models/List.js'),
-  listsController = require('../controllers/list.js')
+  user = require('../models/User.js'),
+  listsController = require('../controllers/list.js'),
+  usersController = require('../controllers/user.js')
 ////login sign up logout and profile view
 userRouter.route('/login')
   .get((req,res) =>{res.render('users/login', {message:req.flash('loginMessage')})
@@ -59,11 +61,24 @@ userRouter.route('/profile/:id/lists', isLoggedIn)
 userRouter.route('/profile/:id/lists/new', isLoggedIn)
   .get(listsController.new)
 
+  userRouter.route('/official/:id', isLoggedIn)
+    .get((req,res) =>{res.render('users/admin', {user: req.user})
+  })
+   .patch(usersController.adminUpdate) //{
+    // var updateObject = req.body;
+    // var id = req.params.id;
+    // db.users.update({"local._id"  : ObjectId(id)}, {$set: {'updateObject.isAdmin':true}});
+//});
+
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) return next()
   res.redirect('/')
 }
 
+// function makeAdmin(req, res, next) {
+//   if(req.isAuthenticated() )
+//   res.redirect('/')
+//}
 // //Admin routes
 // var requiresAdmin = function() {
 //   return [
