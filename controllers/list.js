@@ -23,7 +23,6 @@ module.exports = {
     var newList = new List(req.body)
     newList.user = req.params.id
     newList.location = req.body.location
-    console.log(req.body)
     newList.save((err, newList) => {
         if(err){
           console.log(err)
