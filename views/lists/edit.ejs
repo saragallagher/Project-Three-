@@ -4,7 +4,14 @@
   <label>Title</label>
   <input type="text" name="title" value="<%= list.title%>">
   <label>Location</label>
-  <input type="text" name="location" value="<%= list.location%>">
+  <select name="location" value="<%= list.location%>">
+    <!-- <script>
+   $('select option').val(list.location).attr("selected","selected");
+    </script> -->
+    <% locations.forEach((l) => { %>
+        <option value="<%=l._id%>"> <%=l.title%></option>
+    <% }) %>
+  </select>
   <label>Weather</label>
   <input type="text" name="weather" value="<%= list.weather%>">
   <label>Event Type</label>
