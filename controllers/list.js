@@ -1,5 +1,6 @@
 const
-  List = require('../models/List.js')
+  List = require('../models/List.js'),
+  Location = require('../models/Location.js')
 
 module.exports = {
   index: (req, res) => {
@@ -14,16 +15,20 @@ module.exports = {
     })
   },
   new: (req, res) => {
-    res.render('lists/new',  {user:req.user})
+    Location.find({}, (err, locations)=> {
+    res.render('lists/new', {user:req.user, locations:locations})
+    })
   },
   create: (req, res) => {
     var newList = new List(req.body)
-    console.log(newList);
     newList.user = req.params.id
+    newList.location = req.body.location
+    console.log(req.body)
     newList.save((err, newList) => {
         if(err){
           console.log(err)
         }else{
+          // console.log(newList)
           res.redirect('/lists')
         }
       })
