@@ -14,6 +14,7 @@ module.exports = {
       if(err) return console.log(err)
       var newTask = {}
       newTask.body = req.body.body
+      console.log(newTask)
       newTask.completed = false
       list.task.push(newTask)
       list.save((err, list) => {
