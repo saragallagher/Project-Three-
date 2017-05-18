@@ -15,19 +15,23 @@ module.exports = {
 
   },
   edit: (req, res) => {
-
+    User.findById(req.params.id, (err, user) => {
+      res.render('users/edit',  {user: user})
+    })
   },
   update: (req, res) => {
-    List.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, list) => {
-      res.redirect('/lists/'+ req.params.id)
+    User.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, user) => {
+      if(err) {return (err)}
+      // res.render('users/profile', {user: req.user})
+      res.redirect('/profile')
     })
   },
   destroy: (req, res) => {
-    User.findByIdAndRemove(req.params.id, (err, deleteList) => {
-      res.redirect('/')
-    })
-  },
-
+      User.findByIdAndRemove(req.params.id, (err, deleteUser) => {
+        if(err) return console.log(err)
+        res.redirect('/')
+      })
+    },
 
   adminUpdate: (req, res) => {
     User.findById(req.params.id, (err, user) => {

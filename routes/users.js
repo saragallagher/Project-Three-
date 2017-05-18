@@ -28,25 +28,29 @@ userRouter.get('/profile', isLoggedIn, (req,res) =>{
   res.render('users/profile', {user:req.user})
 })
 
+
 userRouter.get('/logout', isLoggedIn, (req,res) =>{
   req.logout()
   res.redirect('/')
 })
 
-userRouter.delete('/profile/:id', function(req,res){
-          res.json({message: 'task was deleted!', succes: true})
-    })
+// userRouter.delete('/profile/:id', function(req,res){
+//           res.json({message: 'task was deleted!', succes: true})
+//     })
 
 
 //Facebook routes
 userRouter.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 
 userRouter.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  })
+  // passport.authenticate('facebook', { failureRedirect: '/login' }),
+  // function(req, res) {
+  //   // Successful authentication, redirect home.
+  //   res.redirect('/') })
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
 
 //Logout function
 userRouter.get('/logout', function(req, res) {
@@ -54,9 +58,17 @@ userRouter.get('/logout', function(req, res) {
             res.redirect('/');
 });
 
-userRouter.delete('/profile/:id', function(req,res){})
 ///create update and delete lists
+userRouter.route('/profile/:id/edit', isLoggedIn)
+  .get(usersController.edit)
 
+userRouter.route('/profile/:id', isLoggedIn)
+  .patch(usersController.update)
+
+userRouter.route('/profile/:id', isLoggedIn)
+  .delete(usersController.destroy)
+
+//list routes
 userRouter.route('/profile/:id/lists', isLoggedIn)
   .post(listsController.create)
 userRouter.route('/profile/:id/lists/new', isLoggedIn)

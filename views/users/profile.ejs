@@ -45,6 +45,29 @@
     </div>
 </div>
 
-<button><a href="/profile/<%=user._id%>">delete user</a></button>
+<article class="">
+  <%= user.lists %>
+</article>
 
-  <button><a href="/profile/<%=user._id%>/lists/new">Add a List</a></button>
+<% if(user.local.isAdmin || user.facebook.isAdmin) { %>
+  <div type="button" class="btn btn-success">
+    <a href="/users">All users</a>
+  </div>
+<% } %>
+
+<div type="button" class="btn btn-warning">
+  <a href="/profile/<%=user._id%>/edit">Edit Profile</a>
+</div>
+
+<!-- <button><a href="/profile/<%=user._id%>">delete user</a></button> -->
+
+  <div type="button" class="btn btn-info">
+    <a href="/profile/<%=user._id%>/lists/new">Add a List</a>
+  </div>
+
+  <div class="modal-footer">
+     <form class="delete-btn" action="/profile/<%=user.id%>?_method=DELETE" method="POST">
+       <button type="submit" class="btn btn-danger">Delete</button>
+     </form>
+   </div>
+ </div>

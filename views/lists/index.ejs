@@ -1,5 +1,6 @@
 <h1>All Lists: </h1>
 
+<%if(currentUser) { %>
 
 <!-- Display All the lists with title/location/weather/type/username && clickable links -->
 <ul>
@@ -20,4 +21,12 @@
 <% }) %>
 </ul>
 
-<%= console.log(lists)%>
+
+<% }else{ %>
+
+  <% lists.forEach((list) => { %>
+      <li><%= list.title %></li>
+  <% }) %>
+  </ul>
+<%}%>
+

@@ -16,6 +16,7 @@ const
     email: String,
     name: String,
     username: String,
+    isAdmin: {type: Boolean, default: false}
   }//,
   })
 

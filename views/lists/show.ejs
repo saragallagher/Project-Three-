@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 <h1>Individual List</h1>
 
 <!-- if user is list creator or an admin then they can edit or delete lists -->
 <%if(currentUser.id ==list.user || currentUser.local.isAdmin) { %>
+=======
+<div >
+<h3><%= list.title%></h3>
+<%= list.location %> | <%= list.type%> | <%= list.weather%>
+<%if(currentUser.id ==list.user) { %>
+</div>
+
+>>>>>>> 2221bd2da66b143a18fcbf77eb9b7457aa8058e2
     <div>
       <!-- edit the list name, location, weather, type -->
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
@@ -11,17 +20,17 @@
       </form>
     </div>
 
-  <h3><%= list.title%></h3>
-  <%= list.location%> | <%= list.type%> | <%= list.weather%>
+
     <input type="text" id="task-input">
     <button id="add-task"> Add </button>
 
 
 <% }else{ %>
+
     <button id="clone-list">Copy List</button>
 <% } %>
 
-<ul id="tasks-list">
+<ul class="list-group col-sm-6" id="tasks-list">
 
   <li></li>
 
@@ -41,13 +50,18 @@
   var addTask = $('#add-task')
 
 
+
+
   ///append all tasks to the list
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
-    theLi.html('<span>' + task.body + '</span>')
+    theLi.addClass('list-group-item')
+    theLi.html('<span style="padding-right: 2em;">' + task.body + '</span>')
     var editButton = $('<button>').addClass('edit')
+    editButton.css('float', 'right')
     editButton.text('Edit')
     var deleteButton = $('<button>').addClass('delete')
+    deleteButton.css('float', 'right')
     deleteButton.text('Delete')
     theLi.append(editButton, deleteButton)
     tasksList.append(theLi)
@@ -80,19 +94,40 @@
       })
   })
   // edit a task:
-  var editForm = $('<div>').attr('id', 'edit-form')
-  editForm.append('<input type="text" class="edit-input">')
-  editForm.append('<button>Update</button>')
-  editForm.hide()
+  // var editForm = $('<div>').attr('id', 'edit-form')
+  // editForm.append('<input type="text" class="edit-input">')
+  // editForm.append('<button>Update</button>')
+  // editForm.hide()
+  //
+  // tasksList.on('click', 'li button.edit', function(){
+  //   $(this).parent().append(editForm)
+  //   editForm.slideDown()
+  //   $('.edit-input').val($(this).prev().text())
+  // })
+
+
 
   tasksList.on('click', 'li button.edit', function(){
-    $(this).parent().append(editForm)
-    editForm.slideDown()
-    $('.edit-input').val($(this).prev().text())
-  })
+          var id = $(this).parent().attr('id')
+          var text = $(this).prev().html()
+          var editField = $('<input type="text">')
+          var updateButton = $('<button>')
+          console.log(text)
+          editField.attr('value', text)
+          editField.addClass('updater '+id)
+          console.log(editField);
+          updateButton.text('Update')
+          updateButton.attr('id', id)
+          updateButton.addClass('update')
 
-  tasksList.on('click', '#edit-form button', function(){
-    var id = $(this).parent().parent().attr('id')
+          $('#' + id).empty()
+          $('#' + id).append(editField)
+          $('#' + id).append(updateButton)
+        })
+
+  tasksList.on('click', 'li button.update', function(){
+    var id = $(this).parent().attr('id')
+    console.log(id);
     var requestSettings = {
       method: 'patch',
       url: '/lists/<%=list.id%>/tasks/'+id,
@@ -102,7 +137,17 @@
     $.ajax(requestSettings)
       .done(function(data){
         $('#' + id + ' span').text(data.task.body)
-        editForm.slideUp()
+        var theLi = ($('#' + id));
+        theLi.text(data.task.body)
+        var editButton = $('<button>').addClass('edit')
+        editButton.css('float', 'right')
+        editButton.text('Edit')
+        var deleteButton = $('<button>').addClass('delete')
+        deleteButton.css('float', 'right')
+        deleteButton.text('Delete')
+        theLi.append(editButton, deleteButton)
+        var input = $('input').attr('updater ' + id)
+        console.log(input)
         console.log(data)
       })
   })
@@ -111,7 +156,7 @@
     var id = $(this).parent().attr('id')
     var requestSettings = {
       method: 'delete',
-      url: '/lists/<%=list.id%>/tasks/'+id,
+      url: '/lists/<%=list.id%>/tasks/'+id
     }
     $.ajax(requestSettings)
       .done(function(data){
@@ -120,12 +165,17 @@
   })
 </script>
 <% } else {%>
-  <script>
+
+  <script >
+
   var tasksList = $('#tasks-list')
+  var cloneList = $('#clone-list')
+
 
   function appendTask(task){
     var theLi = $('<li>').attr('id', task._id)
-    theLi.html('<span>' + task.body + '</span>')
+    theLi.addClass('list-group-item')
+    theLi.html('<span style="padding-right: 2em;">' + task.body + '</span>')
     tasksList.append(theLi)
   }
 
@@ -134,10 +184,24 @@
     url: '/lists/<%=list.id%>/tasks'
   }
   $.ajax(requestSettings).done(function(allTasks){
+    console.log(allTasks, )
     tasksList.html('')
     allTasks.forEach(function(task){
       appendTask(task)
     })
   })
+
+
+  cloneList.on('click', function(){
+    console.log('before:', '<%= list._id%>', '<%=list.user%>')
+    var requestSettings = {
+      method: 'GET',
+      url: '/lists/<%=list.id%>/copy/<%=currentUser.id%>'
+    }
+    $.ajax(requestSettings).done(function(theList){
+      console.log(theList)
+    })
+  })
+
   </script>
 <% } %>

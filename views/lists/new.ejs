@@ -3,7 +3,11 @@
   <label>Title</label>
   <input type="text" name="title">
   <label>Location</label>
-  <input type="text" name="location">
+  <select name="location">
+    <% locations.forEach((l) => { %>
+        <option value="<%=l._id%>"><%= l.title %></option>
+    <% }) %>
+  </select>
   <label>Weather</label>
   <input type="text" name="weather">
   <label>Event Type</label>
