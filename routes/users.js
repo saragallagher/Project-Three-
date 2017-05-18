@@ -54,6 +54,7 @@ userRouter.get('/logout', function(req, res) {
             res.redirect('/');
 });
 
+userRouter.delete('/profile/:id', function(req,res){})
 ///create update and delete lists
 
 userRouter.route('/profile/:id/lists', isLoggedIn)
@@ -64,36 +65,11 @@ userRouter.route('/profile/:id/lists/new', isLoggedIn)
   userRouter.route('/official/:id', isLoggedIn)
     .get((req,res) =>{res.render('users/admin', {user: req.user})
   })
-   .patch(usersController.adminUpdate) //{
-    // var updateObject = req.body;
-    // var id = req.params.id;
-    // db.users.update({"local._id"  : ObjectId(id)}, {$set: {'updateObject.isAdmin':true}});
-//});
+   .patch(usersController.adminUpdate)
 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) return next()
   res.redirect('/')
 }
-
-// function makeAdmin(req, res, next) {
-//   if(req.isAuthenticated() )
-//   res.redirect('/')
-//}
-// //Admin routes
-// var requiresAdmin = function() {
-//   return [
-//     isLoggedIn(),
-//     function(req, res, next) {
-//       if (req.user && req.user.isAdmin === true)
-//         next();
-//       else
-//         res.send(401, 'Unauthorized');
-//     }
-//   ]
-// };
-//
-// adminRouter.all('/admin/*', requiresAdmin());
-// adminRouter.get('/admin/');
-
 
 module.exports = userRouter

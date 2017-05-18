@@ -10,14 +10,36 @@
         <div class="well">
 
             <h3>Locally Stored User</h3>
-
+<!-- <p><%= user.local %></p>
             <p>
-                <strong>First Name</strong>: <%= user.local.firstname %><br>
-                <strong>Last Name</strong>: <%= user.local.lastname %><br>
-                <strong>id</strong>: <%= user._id %><br>
-                <strong>email</strong>: <%= user.local.email %><br>
+
                 <strong>password</strong>: <%= user.local.password %>
             </p>
+
+            <p>
+                  <% if (user.facebook.id != null) { %>
+                  <h2 class="fa fa-facebook"> Facebook</h2><br>
+                  <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
+                  <strong>id</strong>: <%= user.facebook.id %><br>
+                  <strong>email</strong>: <%= user.facebook.email %><br>
+                  <strong>name</strong>: <%= user.facebook.name %>
+                  <% } %>
+            </p> -->
+          <% if (user.local.email != null) { %>
+            <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
+            <strong>email</strong>: <%= user.local.email %><br>
+            <strong>First Name</strong>: <%= user.local.firstname %><br>
+            <strong>Last Name</strong>: <%= user.local.lastname %><br>
+            <strong>id</strong>: <%= user._id %><br>
+          <% } %>
+
+          <% if (user.facebook.id != null) { %>
+            <h2 class="fa fa-facebook"> Facebook</h2><br>
+            <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
+            <strong>id</strong>: <%= user.facebook.id %><br>
+            <strong>email</strong>: <%= user.facebook.email %><br>
+            <strong>name</strong>: <%= user.facebook.name %>
+          <% } %>
 
         </div>
     </div>

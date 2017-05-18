@@ -21,6 +21,8 @@ module.exports = {
       res.redirect('/')
     })
   },
+
+
   adminUpdate: (req, res) => {
     User.findById(req.params.id, (err, user) => {
         user.local.isAdmin = true;

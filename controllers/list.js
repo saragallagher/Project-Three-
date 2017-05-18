@@ -9,7 +9,7 @@ module.exports = {
     })
   },
   show: (req, res) => {
-    List.findById(req.params.id, (err, list) => {
+    List.findById(req.params.id).populate('user').exec( (err, list) => {
       res.render('lists/show', {list: list})
     })
   },
