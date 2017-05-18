@@ -2,11 +2,11 @@
 
     <h1><%= user.local.firstname %></h1>
 
-    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
 
 </div>
 <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-md-6">
         <div class="well">
 
             <h3>Locally Stored User</h3>
@@ -42,7 +42,12 @@
           <% } %>
 
         </div>
-    </div>
+      </div>
+        <div class="col-md-6">
+          <div class="well">
+            <h2>List</h2>
+          </div>
+        </div>
 </div>
 
 <article class="">
@@ -67,7 +72,7 @@
 
   <div class="modal-footer">
      <form class="delete-btn" action="/profile/<%=user.id%>?_method=DELETE" method="POST">
-       <button type="submit" class="btn btn-danger">Delete</button>
+       <button type="submit" class="btn btn-danger">Delete Account</button>
      </form>
    </div>
  </div>
