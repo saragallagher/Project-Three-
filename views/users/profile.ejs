@@ -10,19 +10,64 @@
         <div class="well">
 
             <h3>Locally Stored User</h3>
-
+<!-- <p><%= user.local %></p>
             <p>
-                <strong>First Name</strong>: <%= user.local.firstname %><br>
-                <strong>Last Name</strong>: <%= user.local.lastname %><br>
-                <strong>id</strong>: <%= user._id %><br>
-                <strong>email</strong>: <%= user.local.email %><br>
+
                 <strong>password</strong>: <%= user.local.password %>
             </p>
+
+            <p>
+                  <% if (user.facebook.id != null) { %>
+                  <h2 class="fa fa-facebook"> Facebook</h2><br>
+                  <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
+                  <strong>id</strong>: <%= user.facebook.id %><br>
+                  <strong>email</strong>: <%= user.facebook.email %><br>
+                  <strong>name</strong>: <%= user.facebook.name %>
+                  <% } %>
+            </p> -->
+          <% if (user.local.email != null) { %>
+            <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
+            <strong>email</strong>: <%= user.local.email %><br>
+            <strong>First Name</strong>: <%= user.local.firstname %><br>
+            <strong>Last Name</strong>: <%= user.local.lastname %><br>
+            <strong>id</strong>: <%= user._id %><br>
+          <% } %>
+
+          <% if (user.facebook.id != null) { %>
+            <h2 class="fa fa-facebook"> Facebook</h2><br>
+            <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
+            <strong>id</strong>: <%= user.facebook.id %><br>
+            <strong>email</strong>: <%= user.facebook.email %><br>
+            <strong>name</strong>: <%= user.facebook.name %>
+          <% } %>
 
         </div>
     </div>
 </div>
 
-<!-- <button><a href="/profile/<%=user._id%>/delete">Add a List</a></button> -->
+<article class="">
+  <%= user.lists %>
+</article>
 
-  <button><a href="/profile/<%=user._id%>/lists/new">Add a List</a></button>
+<% if(user.local.isAdmin || user.facebook.isAdmin) { %>
+  <div type="button" class="btn btn-success">
+    <a href="/users">All users</a>
+  </div>
+<% } %>
+
+<div type="button" class="btn btn-warning">
+  <a href="/profile/<%=user._id%>/edit">Edit Profile</a>
+</div>
+
+<!-- <button><a href="/profile/<%=user._id%>">delete user</a></button> -->
+
+  <div type="button" class="btn btn-info">
+    <a href="/profile/<%=user._id%>/lists/new">Add a List</a>
+  </div>
+
+  <div class="modal-footer">
+     <form class="delete-btn" action="/profile/<%=user.id%>?_method=DELETE" method="POST">
+       <button type="submit" class="btn btn-danger">Delete</button>
+     </form>
+   </div>
+ </div>

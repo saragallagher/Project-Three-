@@ -10,8 +10,11 @@ module.exports = {
     })
   },
   show: (req, res) => {
-    List.findById(req.params.id, (err, list) => {
-      res.render('lists/show', {list})
+
+    List.findById(req.params.id)
+      .populate('location user')
+      .exec( (err, list) => {
+      res.render('lists/show', {list: list})
     })
   },
   new: (req, res) => {
@@ -23,6 +26,7 @@ module.exports = {
     var newList = new List(req.body)
     newList.user = req.params.id
     newList.location = req.body.location
+    console.log(req.body.location)
     newList.save((err, newList) => {
         if(err){
           console.log(err)
@@ -33,8 +37,10 @@ module.exports = {
       })
   },
   edit: (req, res) => {
-    List.findById(req.params.id, (err, list) => {
-      res.render('lists/edit',  {list: list})
+    Location.find({}, (err, locations)=> {
+      List.findById(req.params.id, (err, list) => {
+        res.render('lists/edit', {list: list, locations: locations})
+      })
     })
   },
   update: (req, res) => {

@@ -1,6 +1,7 @@
 // All data is in JSON
 const
-  Location = require('../models/Location.js')
+  Location = require('../models/Location.js'),
+  List = require('../models/List.js')
 
 module.exports = {
   //Showing all locations

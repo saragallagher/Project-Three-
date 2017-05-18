@@ -15,7 +15,6 @@ const
   methodOverride = require('method-override'),
   passportConfig = require('./config/passport.js'),
   userRoutes = require('./routes/users.js'),
-  adminRoutes = require('./routes/admin.js'),
   listRoutes = require('./routes/lists.js'),
   locationRoutes = require('./routes/locations.js'),
   apiRoutes = require('./routes/locations-api.js'),
@@ -35,7 +34,7 @@ const
   });
 
   // middleware
-  app.use(logger('dev'))
+  // app.use(logger('dev'))
   app.use(cookieParser())
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(bodyParser.json())

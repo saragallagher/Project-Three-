@@ -1,9 +1,16 @@
+<<<<<<< HEAD
+<h1>Individual List</h1>
+
+<!-- if user is list creator or an admin then they can edit or delete lists -->
+<%if(currentUser.id ==list.user || currentUser.local.isAdmin) { %>
+=======
 <div >
 <h3><%= list.title%></h3>
-<%= list.location %> | <%= list.type%> | <%= list.weather%>
+<%= list.location.title %> | <%= list.type%> | <%= list.weather%>
 <%if(currentUser.id ==list.user) { %>
 </div>
 
+>>>>>>> 2221bd2da66b143a18fcbf77eb9b7457aa8058e2
     <div>
       <!-- edit the list name, location, weather, type -->
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
@@ -34,7 +41,9 @@
 <div class="fb-comments" data-href="https://travelpackr.herokuapp.com" data-numposts="5"></div>
 
 <!--Script tag with ejs to add tasks if the user is logged in???  -->
-<%if(currentUser.id ==list.user) { %>
+<%if(currentUser.id ==list.user || currentUser.local.isAdmin == true) { %>
+
+
 <script>
   var tasksList = $('#tasks-list')
   var taskInput = $('#task-input')
