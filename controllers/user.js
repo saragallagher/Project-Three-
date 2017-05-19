@@ -23,7 +23,7 @@ module.exports = {
     User.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, user) => {
       if(err) {return (err)}
       // res.render('users/profile', {user: req.user})
-      res.redirect('/profile')
+      res.redirect('/profile/'+user.id)
     })
   },
   destroy: (req, res) => {
