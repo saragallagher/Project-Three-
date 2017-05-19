@@ -27,16 +27,24 @@
 
 
           <% if (user.local.email != null) { %>
-            <div class="info">
+            <div class="right-info">
             <h1><%= user.local.firstname %></h1>
             <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
           </div>
-          <div class="info">
+          <div class="left-info">
             <article class="user-info">
-              <strong>email</strong>: <%= user.local.email %><br>
-              <strong>First Name</strong>: <%= user.local.firstname %><br>
-              <strong>Last Name</strong>: <%= user.local.lastname %><br>
-              <strong>id</strong>: <%= user._id %><br>
+              <div class="user-info">
+              <strong>email</strong>:<br> <span><%= user.local.email %></span><br>
+            </div>
+            <div class="user-info">
+              <strong>First Name</strong>:<br> <span><%= user.local.firstname %></span><br>
+            </div>
+            <div class="user-info">
+              <strong>Last Name</strong>:<br> <span><%= user.local.lastname %></span><br>
+            </div>
+            <div class="user-info">
+              <strong>id</strong>:<br> <span><%= user._id %></span><br>
+            </div>
             </article>
           </div>
           <% } %>
@@ -49,9 +57,12 @@
             </div>
             <div class="left-info">
               <article class="user-info">
-                <strong>id</strong>: <%= user.id %><br>
-                <strong>email</strong>: <%= user.facebook.email %><br>
-                <strong>name</strong>: <%= user.facebook.name %>
+                <strong>id</strong>:<br> <span><%= user.id %></span><br>
+                <hr>
+                <strong>email</strong>:<br> <span><%= user.facebook.email %></span><br>
+                <hr>
+                <strong>name</strong>:<br> <span><%= user.facebook.name %></span>
+                <hr>
               </article>
             </div>
           <% } %>
@@ -133,12 +144,20 @@
      transform: perspective(1px) translateZ(0)
      box-shadow: 0 0 1px transparent;
    }
-   .info {
+   .right-info {
      display: inline-block;
-     width: 220px;
+     width: 250px;
+     text-align: center;
    }
-   .user-linfo {
+   .left-info {
+     display: inline-block;
+     float: right;
+     height: 215px;
+   }
+   .user-info {
      font-size: 16px;
+     height: 60px;
+     border-bottom: 1px solid #CFD1D1;
    }
    .well {
      margin-top: 25px;
@@ -149,6 +168,7 @@
      height: 40px;
      background: #413347;
    }
+   
  </style>
 
  <footer>
