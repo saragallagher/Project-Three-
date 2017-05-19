@@ -1,4 +1,4 @@
-<div class="col-md-6" >
+<div class="col-md-6 col-md-offset-3" >
 
 
 <h1><%= list.title%></h1>
@@ -9,7 +9,7 @@
 <!-- if user is list creator or an admin then they can edit or delete lists -->
 <%if(currentUser.id ==list.user.id || currentUser.local.isAdmin) { %>
 
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <!-- edit the list name, location, weather, type -->
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
       <!-- delete the entire lists with tasks and all -->
@@ -19,8 +19,9 @@
 
         <button type="submit" name="button">Delete</button>
       </form>
+    </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-6">
 
     <input type="text" id="task-input">
     <button class="display-inline"id="add-task"> Add </button>
@@ -35,7 +36,7 @@
 
 <% } %>
 
-<ul class="list-group col-sm-6" id="tasks-list">
+<ul class="list-group col-sm-12" id="tasks-list">
 
   <li></li>
 
