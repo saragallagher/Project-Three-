@@ -43,16 +43,36 @@
 
         </div>
       </div>
+
+
         <div class="col-md-6">
           <div class="well">
-            <h2>List</h2>
+            <h2 class="">List</h2>
+            <article class="user-lists">
+               <% lists.forEach((list) => { %>
+                  <% if (list.user.id == user.id) { %>
+                      <p> <a href="/lists/<%=list._id%>"><%= list.title %></a></p>
+                  <% } %>
+                <% }) %>
+            </article>
           </div>
         </div>
 </div>
 
-<article class="">
-  <%= user.lists %>
-</article>
+<!-- <script>
+var requestSettings = {
+  method: 'get',
+  url: '/lists'
+}
+$.ajax(requestSettings).done(function(allLists){
+  //tasksList.html('')
+  //allLists.forEach(function(list){
+    console.log(allLists)
+    //appendTask(task)
+  })
+//})
+</script> -->
+
 
 <% if(user.local.isAdmin || user.facebook.isAdmin) { %>
   <div type="button" class="btn btn-success">

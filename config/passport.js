@@ -57,17 +57,20 @@ passport.use('local-login', new LocalStrategy({
 passport.use(new FacebookStrategy({
   clientID: process.env.Facebook_clientID,
   clientSecret: process.env.Facebook_clientSecret,
-  callbackURL: "https://travelpackr.herokuapp.com/auth/facebook/callback",
+  //callbackURL: "https://travelpackr.herokuapp.com/auth/facebook/callback",
+   callbackURL: "http://localhost:3000/auth/facebook/callback",
   profileFields: ['id', 'email', 'first_name', 'last_name']
 
 },
 function(token, refreshToken, profile, done) {
+  console.log("Facebook profile:")
+  console.log(profile)
  process.nextTick(function(){
-   User.findOne({ 'facebook.id': profile._id }, function(err, user) {
+   User.findOne({ 'facebook.id': profile._id }, function(err, usr) {
      if(err) {return done(err)};
 
-     if(user) {
-       return done(null, user);
+     if(usr) {
+       return done(null, usr);
      } else {
        var newUser = new User();
 
@@ -82,6 +85,7 @@ function(token, refreshToken, profile, done) {
 
            return done(null, newUser);
        });
+       return newUser
      }
    });
  });

@@ -35,7 +35,7 @@ module.exports = {
 
   adminUpdate: (req, res) => {
     User.findById(req.params.id, (err, user) => {
-        user.local.isAdmin = true;
+        user.isAdmin = true;
         //Save the updated document back to the database
         user.save(function (err, user){
           if (err) {

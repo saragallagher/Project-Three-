@@ -1,6 +1,7 @@
 <div >
 <h3><%= list.title%></h3>
-<h6>By: <%= list.user.local.firstname %></h6>
+<!-- <h6>By: <%= list.user.local.firstname %></h6> -->
+    <h6>By: <%= list.user %></h6>
 <%= list.location.title %> | <%= list.type%> | <%= list.weather%>
 <!-- if user is list creator or an admin then they can edit or delete lists -->
 <%if(currentUser.id ==list.user || currentUser.local.isAdmin) { %>

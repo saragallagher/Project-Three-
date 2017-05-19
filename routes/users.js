@@ -25,7 +25,9 @@ userRouter.route('/signup')
   }))
 
 userRouter.get('/profile/:id', isLoggedIn, (req,res) =>{
-  res.render('users/profile', {user:req.user})
+  List.find({}).populate('user').exec((err, lists) =>{
+    res.render('users/profile', {user:req.user, lists:lists})
+  })
 })
 
 
