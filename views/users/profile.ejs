@@ -1,15 +1,13 @@
 <div class="page-header">
 
-    <h1><%= user.local.firstname %></h1>
 
-    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+
 
 </div>
 <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-md-6">
         <div class="well">
-
-            <h3>Locally Stored User</h3>
 <!-- <p><%= user.local %></p>
             <p>
 
@@ -25,7 +23,10 @@
                   <strong>name</strong>: <%= user.facebook.name %>
                   <% } %>
             </p> -->
+
+
           <% if (user.local.email != null) { %>
+            <h1><%= user.local.firstname %></h1>
             <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
             <strong>email</strong>: <%= user.local.email %><br>
             <strong>First Name</strong>: <%= user.local.firstname %><br>
@@ -33,21 +34,36 @@
             <strong>id</strong>: <%= user._id %><br>
           <% } %>
 
-          <% if (user.facebook.id != null) { %>
-            <h2 class="fa fa-facebook"> Facebook</h2><br>
+          <% if (user.facebook.email != null) { %>
+            <h1><%= user.facebook.name %></h1>
+            <h4 class="fa fa-facebook"> Facebook</h4><br>
             <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
-            <strong>id</strong>: <%= user.facebook.id %><br>
+            <strong>id</strong>: <%= user.id %><br>
             <strong>email</strong>: <%= user.facebook.email %><br>
             <strong>name</strong>: <%= user.facebook.name %>
           <% } %>
 
         </div>
-    </div>
+      </div>
+
+
+        <div class="col-md-6">
+          <div class="">
+            <h2 class="">List</h2>
+            <article class="users">
+               <% lists.forEach((list) => { %>
+                  <% if (list.user.id == user.id) { %>
+                    <a href="/lists/<%=list._id%>"><div class="user-lists">
+                      <h3> <%= list.title %> | <%= list.type %> | <%= list.location.title %></h3>
+                    </div></a>
+                  <% } %>
+                <% }) %>
+            </article>
+          </div>
+        </div>
 </div>
 
-<article class="">
-  <%= user.lists %>
-</article>
+
 
 <% if(user.local.isAdmin || user.facebook.isAdmin) { %>
   <div type="button" class="btn btn-success">
@@ -64,10 +80,32 @@
   <div type="button" class="btn btn-info">
     <a href="/profile/<%=user._id%>/lists/new">Add a List</a>
   </div>
+  <br>
 
   <div class="modal-footer">
      <form class="delete-btn" action="/profile/<%=user.id%>?_method=DELETE" method="POST">
-       <button type="submit" class="btn btn-danger">Delete</button>
+       <button type="submit" class="btn btn-danger">Delete Account</button>
      </form>
    </div>
  </div>
+
+ <style media="screen">
+   .user-lists {
+     width: 400px;
+     height: 60px;
+     border: 1px solid grey;
+     border-radius: 4px;
+     margin: 20px;
+     text-align: center;
+   }
+   .user-lists:hover {
+    box-shadow: 10px 10px 5px #888888;
+    transform: scale(1.1)
+}
+   .btn {
+     margin-bottom: 10px;
+   }
+   h2 {
+     padding-left: 200px;
+   }
+ </style>
