@@ -1,44 +1,33 @@
-<div class="page-header">
-
-
-
-
-
-</div>
+<div class="page-header"></div>
 <div class="row">
     <div class="col-md-6">
         <div class="well">
 <!-- <p><%= user.local %></p>
-            <p>
-
-                <strong>password</strong>: <%= user.local.password %>
-            </p>
-
-            <p>
-                  <% if (user.facebook.id != null) { %>
-                  <h2 class="fa fa-facebook"> Facebook</h2><br>
-                  <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
-                  <strong>id</strong>: <%= user.facebook.id %><br>
-                  <strong>email</strong>: <%= user.facebook.email %><br>
-                  <strong>name</strong>: <%= user.facebook.name %>
-                  <% } %>
-            </p> -->
+      <p><strong>password</strong>: <%= user.local.password %></p>
+        <p><% if (user.facebook.id != null) { %>
+          <h2 class="fa fa-facebook"> Facebook</h2><br>
+          <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
+          <strong>id</strong>: <%= user.facebook.id %><br>
+          <strong>email</strong>: <%= user.facebook.email %><br>
+          <strong>name</strong>: <%= user.facebook.name %>
+          <% } %>
+        </p> -->
 
 
           <% if (user.local.email != null) { %>
             <h1><%= user.local.firstname %></h1>
             <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
-            <strong>email</strong>: <%= user.local.email %><br>
             <strong>First Name</strong>: <%= user.local.firstname %><br>
             <strong>Last Name</strong>: <%= user.local.lastname %><br>
-            <strong>id</strong>: <%= user._id %><br>
+            <strong>email</strong>: <%= user.local.email %><br>
+            <!-- <strong>id</strong>: <%= user._id %><br> -->
           <% } %>
 
           <% if (user.facebook.email != null) { %>
             <h1><%= user.facebook.name %></h1>
             <h4 class="fa fa-facebook"> Facebook</h4><br>
             <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
-            <strong>id</strong>: <%= user.id %><br>
+            <!-- <strong>id</strong>: <%= user.id %><br> -->
             <strong>email</strong>: <%= user.facebook.email %><br>
             <strong>name</strong>: <%= user.facebook.name %>
           <% } %>

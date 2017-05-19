@@ -7,7 +7,7 @@
     <% if (location.id == l.location.id) { %>
       <div class="text-center col-md-4">
         <div class="col-md-12">
-          <div class="panel panel-default">
+          <div class="panel panel-default list-box">
               <div class="panel-heading"><a href='/lists/<%= l.id%>' ><h6><%= l.title %></a></h6></div>
               <div class="panel-body">Created by: <%= l.user.local.firstname %></div>
           </div>
@@ -16,8 +16,15 @@
     <% } %>
   <% }) %>
 </div>
-<% } else { %>
 
+<style>
+.list-box:hover {
+ box-shadow: 10px 10px 5px #888888;
+ transform: scale(1.1)
+}
+</style>
+
+<% } else { %>
 <script type="text/javascript">
   var requestSettings = {
     method: 'GET',
@@ -28,6 +35,4 @@
       window.location= '/login'
     })
 </script>
-
-
 <% } %>
