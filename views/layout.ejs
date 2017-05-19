@@ -119,10 +119,11 @@
          })
 
          createList.on('click', function(){
+
            var requestSettings = {
              method: 'post',
              url: '/profile/<%= currentUser.id %>/lists',
-             data: JSON.stringify({title: inputTitle.val() }),
+             data: JSON.stringify({title: inputTitle.val(), location: locationDropdown.val() }),
              contentType: 'application/json'
            }
            $.ajax(requestSettings)
@@ -131,7 +132,7 @@
             })
          })
 
-         
+
 
 
        </script>
