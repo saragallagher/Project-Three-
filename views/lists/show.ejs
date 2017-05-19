@@ -1,26 +1,28 @@
 <div >
 <h3><%= list.title%></h3>
-<!-- <h6>By: <%= list.user.local.firstname %></h6> -->
 
-    <h6>By: <%= list.user.local.firstname %> <%= list.user.facebook.name%></h6>
+<h6>By: <%= list.user.local.firstname %> <%= list.user.facebook.name%></h6>
+
 <%= list.location.title %> | <%= list.type%> | <%= list.weather%>
 <!-- if user is list creator or an admin then they can edit or delete lists -->
-<%if(currentUser.id ==list.user || currentUser.local.isAdmin) { %>
+<%if(currentUser.id ==list.user.id || currentUser.local.isAdmin) { %>
 </div>
 
 
-    <div>
+
       <!-- edit the list name, location, weather, type -->
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
       <!-- delete the entire lists with tasks and all -->
-      <form method="post" action="/lists/<%=list.id %>?_method=DELETE" >
+      <form class="deleteBTN" method="post" action="/lists/<%=list.id %>?_method=DELETE" >
         <button type="submit" name="button">Delete</button>
       </form>
-    </div>
 
 
-    <input type="text" id="task-input">
-    <button id="add-task"> Add </button>
+
+      <input type="text" id="task-input">
+      <button id="add-task"> Add </button>
+
+
 
 
 <% }else{ %>
@@ -38,7 +40,7 @@
 
 <div class="fb-comments" data-href="http://localhost:3000/lists" data-numposts="2"></div>
 <!--Script tag with ejs to add tasks if the user is logged in???  -->
-<%if(currentUser.id ==list.user || currentUser.local.isAdmin == true) { %>
+<%if(currentUser.id ==list.user.id || currentUser.local.isAdmin == true) { %>
 
 
 <script>

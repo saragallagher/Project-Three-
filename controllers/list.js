@@ -10,7 +10,6 @@ module.exports = {
     })
   },
   show: (req, res) => {
-
     List.findById(req.params.id)
       .populate('location user')
       .exec( (err, list) => {

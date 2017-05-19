@@ -6,11 +6,19 @@
   <label>Location</label>
   <select name="location" value="<%= list.location%>">
     <!-- <script>
-   $('select option').val(list.location).attr("selected","selected");
+   if (list.location == l.id) {
+     $('select option').val(list.location).attr("selected","selected");
+   }
     </script> -->
     <% locations.forEach((l) => { %>
-        <option value="<%=l._id%>"> <%=l.title%></option>
+        <option
+          value="<%=l._id%>"
+          <%= l.id == list.location ? 'selected' : '' %>
+        >
+          <%=l.title%>
+        </option>
     <% }) %>
+
   </select>
   <label>Weather</label>
   <input type="text" name="weather" value="<%= list.weather%>">
