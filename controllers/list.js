@@ -30,6 +30,7 @@ module.exports = {
         if(err){
           console.log(err)
         }else{
+          
           // console.log(newList)
           res.redirect('/lists')
         }
