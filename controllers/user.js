@@ -41,7 +41,7 @@ module.exports = {
           if (err) {
                 res.status(500).send(err)
             }
-            res.redirect('/profile')
+            res.redirect('/profile/'+user.id)
           })
       })
     }

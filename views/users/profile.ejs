@@ -53,9 +53,9 @@
             <article class="users">
                <% lists.forEach((list) => { %>
                   <% if (list.user.id == user.id) { %>
-                    <div class="user-lists">
-                      <p> <a href="/lists/<%=list._id%>"><%= list.title %>| <%= list.location.title %></a></p>
-                    </div>
+                    <a href="/lists/<%=list._id%>"><div class="user-lists">
+                      <h3> <%= list.title %> | <%= list.type %> | <%= list.location.title %></h3>
+                    </div></a>
                   <% } %>
                 <% }) %>
             </article>
@@ -95,12 +95,17 @@
      height: 60px;
      border: 1px solid grey;
      border-radius: 4px;
+     margin: 20px;
+     text-align: center;
    }
    .user-lists:hover {
-    width: 600px;
-    height: 100px;
+    box-shadow: 10px 10px 5px #888888;
+    transform: scale(1.1)
 }
    .btn {
      margin-bottom: 10px;
+   }
+   h2 {
+     padding-left: 200px;
    }
  </style>
