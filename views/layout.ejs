@@ -78,7 +78,7 @@
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
        </script>
-
+<%if(isLoggedIn) { %>
        <script type="text/javascript">
          var newListModal = $('#newList')
          var $newListButton = $('#new-list-button')
@@ -132,9 +132,7 @@
             })
          })
 
-
-
-
        </script>
+       <% } %>
 </body>
 </html>
