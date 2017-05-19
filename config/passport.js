@@ -57,30 +57,41 @@ passport.use('local-login', new LocalStrategy({
 passport.use(new FacebookStrategy({
   clientID: process.env.Facebook_clientID,
   clientSecret: process.env.Facebook_clientSecret,
-  callbackURL: "https://travelpackr.herokuapp.com/auth/facebook/callback",
+  //callbackURL: "https://travelpackr.herokuapp.com/auth/facebook/callback",
+   callbackURL: "http://localhost:3000/auth/facebook/callback",
   profileFields: ['id', 'email', 'first_name', 'last_name']
 
 },
 function(token, refreshToken, profile, done) {
+  console.log("Facebook profile:")
+  // console.log(profile)
  process.nextTick(function(){
-   User.findOne({ 'facebook.id': profile._id }, function(err, user) {
-     if(err) {return done(err)};
+   User.findById(profile._id, function(err, user) {
+     var fbuser = profile
+     if(err) {
+       console.log('im in err')
+       return done(err)
+     };
 
      if(user) {
+        console.log('im user')
+      //  console.log(fbuser)
        return done(null, user);
      } else {
-       var newUser = new User();
-
-       newUser.facebook.id    = profile.id;
+       var newUser = new User()
+         console.log('im in new')
+       newUser.facebook.id    = profile._id;
        newUser.facebook.token = token;
        newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
        newUser.facebook.email = profile.emails[0].value;
 
        newUser.save(function(err) {
+
          if(err)
            throw err;
-
+           console.log(newUser)
            return done(null, newUser);
+
        });
      }
    });

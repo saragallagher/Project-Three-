@@ -12,7 +12,7 @@ userRouter.route('/login')
   .get((req,res) =>{res.render('users/login', {message:req.flash('loginMessage')})
 })
   .post(passport.authenticate('local-login', {
-    successRedirect: '/profile',
+    successRedirect: '/',
     failureRedirect: '/login'
 }))
 
@@ -24,8 +24,10 @@ userRouter.route('/signup')
     failureRedirect: '/signup'
   }))
 
-userRouter.get('/profile', isLoggedIn, (req,res) =>{
-  res.render('users/profile', {user:req.user})
+userRouter.get('/profile/:id', isLoggedIn, (req,res) =>{
+  List.find({}).populate('user location').exec((err, lists) =>{
+    res.render('users/profile', {user:req.user, lists:lists})
+  })
 })
 
 
@@ -64,8 +66,6 @@ userRouter.route('/profile/:id/edit', isLoggedIn)
 
 userRouter.route('/profile/:id', isLoggedIn)
   .patch(usersController.update)
-
-userRouter.route('/profile/:id', isLoggedIn)
   .delete(usersController.destroy)
 
 //list routes
