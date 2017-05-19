@@ -5,6 +5,7 @@
 <h1>Account Profile</h1>
 
 </div>
+<div class="container">
 <div class="row">
     <div class="col-md-6">
         <div class="well">
@@ -26,25 +27,38 @@
 
 
           <% if (user.local.email != null) { %>
+            <div class="info">
             <h1><%= user.local.firstname %></h1>
             <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
-            <strong>email</strong>: <%= user.local.email %><br>
-            <strong>First Name</strong>: <%= user.local.firstname %><br>
-            <strong>Last Name</strong>: <%= user.local.lastname %><br>
-            <strong>id</strong>: <%= user._id %><br>
+          </div>
+          <div class="info">
+            <article class="user-info">
+              <strong>email</strong>: <%= user.local.email %><br>
+              <strong>First Name</strong>: <%= user.local.firstname %><br>
+              <strong>Last Name</strong>: <%= user.local.lastname %><br>
+              <strong>id</strong>: <%= user._id %><br>
+            </article>
+          </div>
           <% } %>
 
           <% if (user.facebook.email != null) { %>
-            <h1><%= user.facebook.name %></h1>
-            <h4 class="fa fa-facebook"> Facebook</h4><br>
-            <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
-            <strong>id</strong>: <%= user.id %><br>
-            <strong>email</strong>: <%= user.facebook.email %><br>
-            <strong>name</strong>: <%= user.facebook.name %>
+            <div class="right-info">
+              <h1><%= user.facebook.name %></h1>
+              <h4 class="fa fa-facebook"> Facebook</h4><br>
+              <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
+            </div>
+            <div class="left-info">
+              <article class="user-info">
+                <strong>id</strong>: <%= user.id %><br>
+                <strong>email</strong>: <%= user.facebook.email %><br>
+                <strong>name</strong>: <%= user.facebook.name %>
+              </article>
+            </div>
           <% } %>
 
         </div>
       </div>
+
 
 
         <div class="col-md-6">
@@ -61,6 +75,7 @@
             </article>
           </div>
         </div>
+      </div>
 </div>
 
 
@@ -89,6 +104,8 @@
    </div>
  </div>
 
+
+
  <style media="screen">
    .user-lists {
      width: 400px;
@@ -104,16 +121,36 @@
     transform: scale(1.1)
 }
    .btn {
-     margin-bottom: 10px;
+     margin-bottom: 20px;
    }
    h2 {
      padding-left: 200px;
    }
-   body {
+   .container-1 {
      background-color: #B7EBA4
    }
    .btn-success:hover {
-     transform: perspective(1px) translateZ(0);
+     transform: perspective(1px) translateZ(0)
      box-shadow: 0 0 1px transparent;
    }
+   .info {
+     display: inline-block;
+     width: 220px;
+   }
+   .user-linfo {
+     font-size: 16px;
+   }
+   .well {
+     margin-top: 25px;
+     height: 280px;
+     box-shadow: 0 0 1px transparent;
+   }
+   footer {
+     height: 40px;
+     background: #413347;
+   }
  </style>
+
+ <footer>
+
+ </footer>
