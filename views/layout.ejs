@@ -12,28 +12,18 @@
 	<!-- AmCharts Map Resources -->
 	<link rel="stylesheet" href="/ammap/ammap.css"/>
 	<link rel="stylesheet" href="/ammap/plugins/export/export.css"/>
+	<script src="/underscore.js"></script>
 	<script src="/ammap/ammap.js"></script>
 	<script src="/ammap/maps/js/worldLow.js"></script>
 	<script src="/ammap/maps/js/continentsLow.js"></script>
 	<script src="/ammap/plugins/export/export.min.js"></script>
 	<script src="/ammap/themes/light.js"></script>
-
   <!-- Facebook API resources -->
   <meta property="fb:app_id" content="1848398465423039" />
   <meta property="fb:admins" content="591a41046a6e2842b1d6afca"/>
+
 </head>
  <body>
-   <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1848398465423039";
-            fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-      </script>
-
-
 			   <%-include partials/nav %>
 
         <%if(!isLoggedIn) {  %>
@@ -71,5 +61,14 @@
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
        </script>
+          <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1848398465423039";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
 </body>
 </html>
