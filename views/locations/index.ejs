@@ -5,5 +5,10 @@
   <!-- <button><a href="/lists/new">Add a List</a></button> -->
 <% locations.forEach((location) => { %>
     <li><a href="/locations/<%= location.id%>"><%= location.title %></a></li>
+    <div>
+    <!-- delete the entire lists with tasks and all -->
+      <form method="post" action="/locations/<%=location.id %>?_method=DELETE">
+        <button type="submit" name="button">Delete</button>
+      </form>
+    </div>
 <% }) %>
-</ul>

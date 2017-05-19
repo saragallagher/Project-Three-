@@ -10,7 +10,6 @@ module.exports = {
     })
   },
   show: (req, res) => {
-
     List.findById(req.params.id)
       .populate('location user')
       .exec( (err, list) => {
@@ -23,6 +22,7 @@ module.exports = {
     })
   },
   create: (req, res) => {
+    console.log(req.user)
     var newList = new List(req.body)
     newList.user = req.params.id
     newList.location = req.body.location
@@ -31,7 +31,17 @@ module.exports = {
         if(err){
           console.log(err)
         }else{
-          
+
+          var user_v = req.user
+          var user_v_lists = req.user.lists
+          var lists_pusher_function = function (array) {
+            user_v_lists.push(array)
+            user_v.save
+          }
+          lists_pusher_function(newList)
+          // user_v.lists.push(newList)
+
+
           // console.log(newList)
           res.redirect('/lists')
         }
@@ -50,6 +60,7 @@ module.exports = {
     })
   },
   destroy: (req, res) => {
+
     List.findByIdAndRemove(req.params.id, (err, deleteList) => {
       res.redirect('/lists')
     })

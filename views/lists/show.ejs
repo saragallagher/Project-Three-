@@ -1,14 +1,15 @@
 <div >
+
 <h1><%= list.title%></h1>
 <h3>By: <%= list.user.local.firstname %></h3>
 
 
 <h4><%= list.location.title %> </h4>
 
-
 <!-- if user is list creator or an admin then they can edit or delete lists -->
 <%if(currentUser.id ==list.user.id || currentUser.local.isAdmin) { %>
 </div>
+
 
 
     <div class="col-sm-3">
@@ -16,13 +17,13 @@
       <button type="button" name="button"><a href="/lists/<%= list.id %>/edit">Edit</a></button>
       <!-- delete the entire lists with tasks and all -->
 
+      <form class="deleteBTN" method="post" action="/lists/<%=list.id %>?_method=DELETE" >
 
-      <form method="post" action="/lists/<%=list.id %>?_method=DELETE" class="listDeleteBtn">
         <button type="submit" name="button">Delete</button>
       </form>
-    </div>
 
     <div class="col-sm-4">
+
 
     <input type="text" id="task-input">
     <button class="display-inline"id="add-task"> Add </button>
@@ -44,8 +45,7 @@
 </ul>
 
 
-<div class="fb-comments" data-href="https://travelpackr.herokuapp.com" data-numposts="5"></div>
-
+<div class="fb-comments" data-href="http://localhost:3000/lists" data-numposts="2"></div>
 <!--Script tag with ejs to add tasks if the user is logged in???  -->
 <%if(currentUser.id ==list.user.id || currentUser.local.isAdmin == true) { %>
 

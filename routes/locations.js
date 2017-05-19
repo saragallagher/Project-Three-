@@ -9,9 +9,13 @@ locationRouter.route('/')
 
 locationRouter.get('/new', locationsController.new)
 
-locationRouter.route('/:id')
+locationRouter.route('/:id', isLoggedIn)
   .get(locationsController.show)
   .delete(locationsController.destroy)
 
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()) return next()
+  res.redirect('/')
+}
 
 module.exports = locationRouter
