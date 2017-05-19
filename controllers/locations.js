@@ -1,5 +1,7 @@
 const
-  Location = require('../models/Location.js')
+  Location = require('../models/Location.js'),
+  List = require('../models/List.js'),
+  User = require('../models/User.js')
 
 module.exports = {
   //Showing all locations
@@ -9,14 +11,15 @@ module.exports = {
       res.render('locations/index', {locations: locationsFromDb})
     })
   },
-  // Show a specific location
+  // Show all lists associated to a specific location
   show: (req, res) => {
     Location.findById(req.params.id, (err, location) => {
-      if(err) return console.log(err)
-      res.render('locations/show', {location: location})
+      List.find({}).populate('location user').exec((err,lists) =>{
+        if(err) return console.log(err)
+        res.render('locations/show', {location:location, lists:lists})
+      })
     })
   },
-
   new: (req, res) => {
     res.render('locations/new')
   },

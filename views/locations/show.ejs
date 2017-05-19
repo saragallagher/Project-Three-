@@ -1,14 +1,26 @@
-<h1>The new Location: <%= location.title%></h1>
-<ul>
-  <li>svgPath: <%= location.svgPath%></li>
-  <li>zoomLevel: <%= location.zoomLevel%></li>
-  <li>scale: <%= location.scale%></li>
-  <li>title: <%= location.title%></li>
-  <li>latitude: <%= location.latitude%></li>
-  <li>longitude: <%= location.longitude%></li>
-  <li>url: <%= location.url%></li>
-</ul>
+<%if(isLoggedIn) { %>
+<div class="page-header">
+<h1><%= location.title%> </h1>
+<% lists.forEach((l) => { %>
+  <% if (location.id == l.location.id) { %>
+    <div class="panel panel-default col row">
+    <div class="panel-heading"><a href='/lists/<%= l.id%>' ><h3><%= l.title %></a></h3></div>
+    <div class="panel-body">Created by: <%= l.user.local.firstname %></div>
+    </div>
+  <% } %>
+<% }) %>
+<% } else { %>
 
-<form method="post" action="/locations/<%=location.id %>?_method=DELETE" >
-<button type="submit" name="button">Delete</button>
-</form>
+<script type="text/javascript">
+  var requestSettings = {
+    method: 'GET',
+    url: '/'
+  }
+  $.ajax(requestSettings)
+    .done(function(done){
+      window.location= '/login'
+    })
+</script>
+
+
+<% } %>

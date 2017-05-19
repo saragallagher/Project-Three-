@@ -3,11 +3,18 @@
 <script>
 
   $.ajax({
-    url: '/api/locations',
+    url: '/api/lists',
     method: 'get'
   })
-    .done(function(locations) {
+    .done(function(lists) {
+      var locations = lists.map(function(list){
+      	return list.location
+      })
 
+      locations = _.uniq(locations, function(location, key, title) {
+          return location.title;
+      });
+      
       var continentsDataProvider;
 
       var worldDataProvider = {
